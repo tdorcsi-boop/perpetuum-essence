@@ -1,0 +1,2180 @@
+
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Perpetuum Essence — Automatizált tartalomkészítés szakértőknek | Árgyelán Dorina</title>
+  <meta name="description" content="Írj egyszer és legyél rendszeresen jelen mindenhol. Tartalom-automatizálási workshop Claude AI és Make.com segítségével — 1 forrásból 12 havi tartalom, heti 1 óra alatt.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Poppins:wght@400;500;600&family=Raleway:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── TOKENS ───────────────────────────────────────────── */
+    :root {
+      --green:   #00594D;
+      --blue:    #073950;
+      --lblue:   #86C2CC;
+      --yellow:  #FFDE59;
+      --paper:   #EFF3EF;
+      --white:   #FFFFFF;
+      --muted:   rgba(7,57,80,.55);
+
+      --c-darkblue: #073950;
+      --c-yellow:   #FFDE59;
+      --c-paper:    #EFF3EF;
+      --font-display: "Yeseva One", Georgia, serif;
+      --font-body:    "Poppins", system-ui, sans-serif;
+      --font-accent:  "Raleway", Georgia, serif;
+      --ease-soft: cubic-bezier(.22,.61,.36,1);
+
+      --nav-h: 72px;
+      --max-w: 1280px;
+      --px:    28px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      font-family: var(--font-body);
+      color: var(--blue);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a   { text-decoration: none; color: inherit; }
+
+    /* ── LAYOUT ───────────────────────────────────────────── */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--px);
+    }
+    .section { padding: 6rem 0; }
+
+    /* ── LABEL (with side dashes) ─────────────────────────── */
+    .label {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+    .label--center { justify-content: center; }
+    .label--yellow { color: rgba(255,222,89,.7); }
+    .label--white  { color: rgba(255,255,255,.45); }
+    .label::before,
+    .label::after {
+      content: '';
+      flex: 0 0 28px;
+      height: 1px;
+      background: currentColor;
+      opacity: .5;
+    }
+    .label--no-dash::before,
+    .label--no-dash::after { display: none; }
+
+    /* ── BUTTONS ──────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: background .25s var(--ease-soft), opacity .2s, transform .1s var(--ease-soft);
+      text-decoration: none;
+    }
+    .btn:active { transform: scale(.98); }
+    .btn-yellow {
+      background: var(--yellow);
+      color: var(--blue);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
+    }
+    .btn-yellow:hover { background: #f5d143; }
+    .btn-ghost-white {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,.45);
+    }
+    .btn-ghost-white:hover { border-color: var(--white); }
+    .btn-text {
+      background: transparent;
+      color: var(--blue);
+      opacity: .65;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .btn-text:hover { opacity: 1; }
+
+    /* ── FADE-IN (IntersectionObserver) ───────────────────── */
+    .fi {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s var(--ease-soft), transform .6s var(--ease-soft);
+    }
+    .fi.visible { opacity: 1; transform: none; }
+
+    /* ═══════════════════════════════════════════════════════
+       NAVBAR
+    ═══════════════════════════════════════════════════════ */
+    /* ═══════════════════════════════════════════════════════
+       DARK MODE
+    ═══════════════════════════════════════════════════════ */
+    [data-theme="dark"] {
+      --paper: #0d1e28;
+      --white: #142330;
+      color-scheme: dark;
+    }
+    [data-theme="dark"] body { color: #bdd6e4; }
+    [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3 { color: #bdd6e4; }
+    [data-theme="dark"] .pe-nav__wordmark-main { color: #bdd6e4; }
+    [data-theme="dark"] .pe-nav__wordmark-main em { color: rgba(189,214,228,.55); }
+    [data-theme="dark"] .pe-nav__subname { color: #bdd6e4; }
+    [data-theme="dark"] .pe-nav.is-scrolled {
+      background: rgba(13,30,40,.88);
+      border-bottom-color: rgba(189,214,228,.1);
+    }
+    [data-theme="dark"] .pe-nav__icon { color: rgba(189,214,228,.7); }
+    [data-theme="dark"] .pe-nav__icon:hover { color: #bdd6e4; }
+    [data-theme="dark"] .pe-nav__burger-ico { stroke: #bdd6e4; }
+    [data-theme="dark"] .pe-nav__theme { color: #bdd6e4; border-color: rgba(189,214,228,.2); }
+    [data-theme="dark"] .pe-nav__theme:hover { background: rgba(189,214,228,.08); }
+    [data-theme="dark"] .hero__body  { color: rgba(189,214,228,.55); }
+    [data-theme="dark"] .hero__print { color: rgba(189,214,228,.45); }
+    [data-theme="dark"] .hero__stats { border-color: rgba(189,214,228,.1); }
+    [data-theme="dark"] .hero__stat-label { color: rgba(189,214,228,.45); }
+    [data-theme="dark"] .hero__card  { background: #142330; }
+    [data-theme="dark"] .card__head  { background: #1a2f3f; }
+    [data-theme="dark"] .card__divider { background: rgba(189,214,228,.08); }
+    [data-theme="dark"] .card__head-label,
+    [data-theme="dark"] .card__head-time { color: rgba(189,214,228,.5); }
+    [data-theme="dark"] .chip:not(.chip--yellow) { background: rgba(189,214,228,.1); color: #bdd6e4; }
+    [data-theme="dark"] .card__foot { border-color: rgba(189,214,228,.07); }
+    [data-theme="dark"] .card__foot-text { color: rgba(189,214,228,.5); }
+    [data-theme="dark"] .kalkulator { background: var(--paper); }
+    [data-theme="dark"] .tally-placeholder { background: #1a2f3f; border-color: rgba(189,214,228,.12); color: rgba(189,214,228,.4); }
+    [data-theme="dark"] .kalkulator__stat-num { color: #bdd6e4; }
+    [data-theme="dark"] .kalkulator__stat { border-color: rgba(189,214,228,.12); }
+    [data-theme="dark"] .consequence { background: var(--paper); }
+    [data-theme="dark"] .modszer__body,
+    [data-theme="dark"] .modszer__sub { color: rgba(189,214,228,.55); }
+    [data-theme="dark"] .acc-trigger { background: #1a2f3f; box-shadow: none; }
+    [data-theme="dark"] .acc-trigger:hover { background: #1e3548; }
+    [data-theme="dark"] .acc-title { color: #bdd6e4; }
+    [data-theme="dark"] .acc-subtitle { color: rgba(189,214,228,.55); }
+    [data-theme="dark"] .acc-num { background: rgba(189,214,228,.1); color: #bdd6e4; }
+    [data-theme="dark"] .acc-wrap::before { background: repeating-linear-gradient(to bottom, rgba(189,214,228,.2) 0 6px, transparent 6px 12px); }
+    [data-theme="dark"] .csomagok { background: #0d1e28; }
+    [data-theme="dark"] .pkg-card { background: #1a2f3f; border-color: rgba(189,214,228,.1); }
+    [data-theme="dark"] .pkg-name { color: #bdd6e4; }
+    [data-theme="dark"] .pkg-tagline,
+    [data-theme="dark"] .pkg-price-note { color: rgba(189,214,228,.5); }
+    [data-theme="dark"] .pkg-price { color: #bdd6e4; }
+    [data-theme="dark"] .pkg-div { border-color: rgba(189,214,228,.1); }
+    [data-theme="dark"] .pkg-feats li { color: rgba(189,214,228,.8); }
+    [data-theme="dark"] .pkg-cta { color: #bdd6e4; border-color: rgba(189,214,228,.2); }
+    [data-theme="dark"] .pkg-cta:hover { border-color: #bdd6e4; }
+    [data-theme="dark"] .tool-chip { background: #1a2f3f; border-color: rgba(189,214,228,.1); color: #bdd6e4; }
+    [data-theme="dark"] .kompatibilis__fine { color: rgba(189,214,228,.4); }
+    [data-theme="dark"] .kompatibilis__divider { border-color: rgba(189,214,228,.1); }
+    [data-theme="dark"] .gyik-item,
+    [data-theme="dark"] .gyik-item:first-child { border-color: rgba(189,214,228,.1); }
+    [data-theme="dark"] .gyik-q { color: #bdd6e4; }
+    [data-theme="dark"] .gyik-item.open .gyik-q { color: var(--lblue); }
+    [data-theme="dark"] .gyik-answer { color: rgba(189,214,228,.55); }
+    [data-theme="dark"] .sticky-bar {
+      background: rgba(13,30,40,.92);
+      border-color: rgba(189,214,228,.12);
+      color: #bdd6e4;
+    }
+    [data-theme="dark"] .footer__brand p,
+    [data-theme="dark"] .footer__links a { color: rgba(189,214,228,.5); }
+    [data-theme="dark"] .footer__links a:hover { color: #bdd6e4; }
+
+    /* ═══════════════════════════════════════════════════════
+       NAVBAR
+    ═══════════════════════════════════════════════════════ */
+    .pe-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: var(--nav-h);
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: height .28s var(--ease-soft), background .28s var(--ease-soft),
+                  backdrop-filter .28s var(--ease-soft), border-color .28s var(--ease-soft);
+    }
+    .pe-nav.is-scrolled {
+      height: 60px;
+      background: rgba(239,243,239,.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom-color: rgba(7,57,80,.1);
+    }
+    .pe-nav__inner {
+      max-width: var(--max-w); height: 100%;
+      margin: 0 auto; padding: 0 var(--px);
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    /* Brand */
+    .pe-nav__brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .pe-nav__brand img { height: 38px; width: auto; transition: height .28s var(--ease-soft); border-radius: 6px; }
+    .pe-nav.is-scrolled .pe-nav__brand img { height: 32px; }
+    .pe-nav__wordmark {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .pe-nav__wordmark-main {
+      font-family: var(--font-display);
+      font-size: 18px; line-height: 1;
+      color: var(--blue); letter-spacing: -.005em;
+    }
+    .pe-nav__wordmark-main em {
+      font-family: var(--font-accent);
+      font-style: italic; font-weight: 400;
+      color: var(--muted);
+    }
+    .pe-nav__subname {
+      font-family: var(--font-accent);
+      font-style: italic; font-size: 11px; line-height: 1;
+      color: var(--blue); opacity: .7;
+    }
+    /* Right group */
+    .pe-nav__right {
+      display: flex; align-items: center; gap: 10px;
+    }
+    /* Theme toggle */
+    .pe-nav__theme {
+      background: none;
+      border: 1px solid rgba(7,57,80,.18);
+      border-radius: 50%;
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 16px;
+      color: var(--blue);
+      transition: background .2s, border-color .2s;
+      flex-shrink: 0;
+    }
+    .pe-nav__theme:hover { background: rgba(7,57,80,.06); border-color: rgba(7,57,80,.3); }
+    /* CTA pill */
+    .pe-nav__cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-body); font-size: 13px; font-weight: 600;
+      color: var(--blue); background: var(--yellow);
+      border: 0; border-radius: 999px; padding: 9px 18px;
+      text-decoration: none; cursor: pointer; white-space: nowrap;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
+      transition: background .25s var(--ease-soft), transform .1s;
+    }
+    .pe-nav__cta:hover  { background: #f5d143; }
+    .pe-nav__cta:active { transform: scale(.98); }
+    /* Icon buttons (user, cart) */
+    .pe-nav__icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); text-decoration: none;
+      transition: color .2s, background .2s;
+      flex-shrink: 0;
+    }
+    .pe-nav__icon:hover { color: var(--blue); background: rgba(7,57,80,.06); }
+    .pe-nav__icon svg { display: block; }
+    /* Hamburger */
+    .pe-nav__burger {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      background: none; border: none; cursor: pointer;
+      transition: background .2s;
+      flex-shrink: 0; padding: 0;
+    }
+    .pe-nav__burger:hover { background: rgba(7,57,80,.06); }
+    .pe-nav__burger-ico { display: block; }
+
+    @media (max-width: 640px) {
+      .pe-nav__cta { display: none; }
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       OVERLAY MENU
+    ═══════════════════════════════════════════════════════ */
+    .mob-overlay {
+  position: fixed;
+  top: 68px;
+  right: 24px;
+  z-index: 300;
+  background: var(--white);
+  border: 1px solid rgba(7,57,80,.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  min-width: 240px;
+  box-shadow: 0 8px 32px rgba(7,57,80,.15);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity .25s var(--ease-soft), transform .25s var(--ease-soft);
+}
+.mob-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+.mob-overlay__close { display: none; }
+.mob-overlay__links {
+  display: flex; flex-direction: column;
+  gap: .75rem; list-style: none; padding: 0; margin: 0 0 1rem;
+}
+.mob-overlay__links a {
+  font-family: var(--font-body);
+  font-size: 1rem; font-weight: 500;
+  color: var(--blue);
+  transition: color .2s;
+}
+.mob-overlay__links a:hover { color: var(--green); }
+.mob-overlay__cta {
+  display: block; text-align: center;
+  background: var(--yellow); color: var(--blue);
+  padding: 10px 20px; border-radius: 999px;
+  font-size: .9rem; font-weight: 600;
+}
+
+    /* ═══════════════════════════════════════════════════════
+       STICKY CTA BAR
+    ═══════════════════════════════════════════════════════ */
+    .sticky-bar {
+      position: fixed;
+      bottom: 24px; left: 50%; transform: translateX(-50%) translateY(120px);
+      z-index: 180;
+      background: rgba(239,243,239,.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(7,57,80,.12);
+      border-radius: 999px;
+      padding: 10px 12px 10px 22px;
+      display: flex; align-items: center; gap: 14px;
+      box-shadow: 0 8px 32px rgba(7,57,80,.16);
+      font-size: 13px; font-weight: 500; color: var(--blue);
+      white-space: nowrap;
+      transition: transform .45s var(--ease-soft);
+    }
+    .sticky-bar.visible { transform: translateX(-50%) translateY(0); }
+    .sticky-bar__dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green); flex-shrink: 0;
+    }
+    .sticky-bar__sep { opacity: .3; }
+    .sticky-bar__btn {
+      background: var(--yellow); color: var(--blue);
+      font-family: var(--font-body); font-size: 13px; font-weight: 600;
+      border: none; border-radius: 999px; padding: 8px 18px;
+      cursor: pointer; text-decoration: none;
+      transition: background .2s;
+    }
+    .sticky-bar__btn:hover { background: #f5d143; }
+
+    @media (max-width: 480px) {
+      .sticky-bar { font-size: 12px; padding: 8px 10px 8px 16px; gap: 10px; }
+      .sticky-bar__brand { display: none; }
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       01 HERO
+    ═══════════════════════════════════════════════════════ */
+    .hero {
+      padding-top: calc(var(--nav-h) + 3.5rem);
+      padding-bottom: 5rem;
+      background: var(--paper);
+      overflow: hidden;
+    }
+    .hero__inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 var(--px);
+      display: grid;
+      grid-template-columns: 1fr 480px;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero__label-row {
+      display: flex; align-items: center; gap: .75rem;
+      margin-bottom: 1.5rem;
+      font-size: 11px; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .hero__label-line { flex: 0 0 28px; height: 1px; background: var(--muted); opacity: .5; }
+    .hero__label-sep { opacity: .4; }
+    h1.hero__h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem,5vw,4rem);
+      line-height: 1.1;
+      color: var(--blue);
+      margin: 0 0 .85rem;
+    }
+    .hero__sub {
+      display: block;
+      font-family: var(--font-accent);
+      font-style: italic; font-weight: 400;
+      font-size: clamp(1rem,2vw,1.25rem);
+      color: var(--green);
+      margin-bottom: 1.25rem;
+    }
+    .hero__body {
+      font-size: 15px; color: var(--muted);
+      max-width: 48ch; margin-bottom: 2rem; line-height: 1.75;
+    }
+    .hero__stats {
+      display: flex; gap: 2.25rem; flex-wrap: wrap;
+      margin-bottom: 2.25rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(7,57,80,.1);
+    }
+    .hero__stat-num {
+      font-family: var(--font-display);
+      font-size: 1.65rem; color: var(--blue); line-height: 1;
+    }
+    .hero__stat-label {
+      font-size: 10px; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+      margin-top: 3px;
+    }
+    .hero__actions {
+      display: flex; align-items: center; gap: 1.25rem;
+      flex-wrap: wrap; margin-bottom: 1rem;
+    }
+    .hero__print {
+      font-size: 12px; color: var(--muted); opacity: .7;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .hero__print-dot { color: var(--yellow); }
+
+    /* ── Floating card ──────────────────────────────────── */
+    .hero__card {
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(7,57,80,.14), 0 4px 16px rgba(7,57,80,.07);
+      animation: cardFloat 3s ease-in-out infinite;
+    }
+    @keyframes cardFloat {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-8px); }
+    }
+
+    /* Header row */
+    .card__head {
+      background: var(--white);
+      padding: 14px 18px 12px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .card__head-label {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 10px; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .card__head-star {
+      color: var(--yellow); font-size: 13px; line-height: 1;
+    }
+    .card__head-time {
+      font-size: 11px; color: var(--muted);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .card__head-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #22c55e; flex-shrink: 0;
+    }
+
+    /* Divider */
+    .card__divider {
+      height: 1px;
+      background: rgba(7,57,80,.08);
+      margin: 0 18px;
+    }
+
+    /* Source bar */
+    .card__source {
+      background: var(--blue);
+      margin: 14px 14px 0;
+      border-radius: 12px;
+      padding: 13px 14px;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    }
+    .card__source-left {
+      display: flex; align-items: center; gap: 11px;
+    }
+    .card__play {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--yellow); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .card__play::after {
+      content: '';
+      border-style: solid;
+      border-width: 5px 0 5px 10px;
+      border-color: transparent transparent transparent var(--blue);
+      margin-left: 2px;
+    }
+    .card__source-inner { display: flex; flex-direction: column; gap: 2px; }
+    .card__source-micro {
+      font-size: 9px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--yellow);
+    }
+    .card__source-text {
+      font-size: 13px; font-weight: 500; color: var(--white);
+    }
+    .card__yt {
+      border: 1.5px solid rgba(255,255,255,.45);
+      color: var(--white);
+      font-size: 9px; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 4px 10px; border-radius: 999px;
+      white-space: nowrap; flex-shrink: 0;
+    }
+
+    /* Connector SVG tree */
+    .card__tree {
+      display: block;
+      width: 100%; height: 28px;
+      overflow: visible;
+    }
+
+    /* Chips */
+    .card__body { padding: 0 16px 16px; }
+    .card__chips {
+      display: flex; flex-wrap: nowrap; gap: 5px;
+      margin-bottom: 14px;
+    }
+    .chip {
+      font-size: 10px; font-weight: 700; letter-spacing: .03em;
+      padding: 4px 8px; border-radius: 999px;
+      background: rgba(7,57,80,.07); color: var(--blue);
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .chip--yellow { background: var(--yellow); }
+
+    /* Footer row */
+    .card__foot {
+      border-top: 1px solid rgba(7,57,80,.07);
+      padding-top: 12px;
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    }
+    .card__foot-text {
+      font-size: 11px; color: var(--muted);
+      display: flex; align-items: center; gap: 5px;
+    }
+    .card__foot-num {
+      font-family: var(--font-accent);
+      font-style: italic; font-size: .85rem;
+      color: var(--green); white-space: nowrap;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       02 KALKULÁTOR
+    ═══════════════════════════════════════════════════════ */
+    .kalkulator { background: var(--paper); text-align: center; }
+    .kalkulator .label { justify-content: center; }
+    .kalkulator__h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem,5vw,3.75rem);
+      line-height: 1.1; color: var(--blue);
+      margin: 0 0 1.25rem;
+    }
+    .kalkulator__h2 em {
+      font-family: var(--font-accent);
+      font-style: italic; color: var(--green);
+    }
+    .kalkulator__sub {
+      font-size: 16px; color: var(--muted);
+      max-width: 52ch; margin: 0 auto 3.5rem;
+    }
+    .kalkulator__stats {
+      display: flex; justify-content: center;
+      gap: 0; margin-bottom: 3.5rem;
+      max-width: 720px; margin-left: auto; margin-right: auto;
+    }
+    .kalkulator__stat {
+      flex: 1; padding: 0 2rem;
+      border-right: 1px solid rgba(7,57,80,.12);
+    }
+    .kalkulator__stat:last-child { border-right: none; }
+    .kalkulator__stat-num {
+      font-family: var(--font-display);
+      font-size: 2.5rem; color: var(--blue); line-height: 1;
+      margin-bottom: 6px;
+    }
+    .kalkulator__stat-label {
+      font-size: 10px; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .kalkulator__intro {
+      font-size: 15px; color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .tally-placeholder {
+  max-width: 680px; margin: 0 auto;
+  background: var(--white);
+  border: 2.5px dashed var(--yellow);
+  border-radius: 16px;
+  padding: 3.5rem 2rem;
+  color: var(--muted); font-size: 13px;
+  box-shadow: 0 4px 24px rgba(7,57,80,.08);
+}
+    .tally-placeholder code {
+      font-family: monospace; font-size: 12px;
+      background: rgba(7,57,80,.06);
+      padding: 2px 7px; border-radius: 4px;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       03 CONSEQUENCE
+    ═══════════════════════════════════════════════════════ */
+    .consequence {
+      background: var(--paper);
+      padding: 5rem 0;
+      text-align: center;
+    }
+    .consequence__h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem,3.5vw,2.5rem);
+      color: var(--blue);
+      max-width: 30ch; margin: 0 auto; line-height: 1.25;
+    }
+    .consequence__h2 em {
+      font-family: var(--font-accent);
+      font-style: italic; color: var(--green);
+    }
+    .consequence__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 3rem auto 0;
+      text-align: left;
+    }
+    .consequence__card {
+      background: var(--white);
+      border: 1px solid rgba(7,57,80,.08);
+      border-radius: 16px;
+      padding: 2rem 1.75rem;
+    }
+    .consequence__icon {
+      font-size: 2rem; display: block; margin-bottom: .75rem;
+    }
+    .consequence__card-h {
+      font-family: var(--font-display);
+      font-size: 1.05rem; color: var(--blue); margin-bottom: .5rem; line-height: 1.25;
+    }
+    .consequence__card p {
+      font-size: 13px; color: var(--muted); line-height: 1.7; margin: 0;
+    }
+    [data-theme="dark"] .consequence__card {
+      background: #1a2f3f; border-color: rgba(189,214,228,.08);
+    }
+    [data-theme="dark"] .consequence__card-h { color: #bdd6e4; }
+    @media (max-width: 640px) {
+      .consequence__grid { grid-template-columns: 1fr; }
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       04 VALLOMÁS
+    ═══════════════════════════════════════════════════════ */
+    .vallomas { background: var(--blue); position: relative; overflow: hidden; }
+    .vallomas__sparkle {
+      position: absolute;
+      color: var(--yellow); opacity: .15;
+      font-size: 4rem; user-select: none; line-height: 1;
+      pointer-events: none;
+    }
+    .vallomas__sparkle--tl { top: 2.5rem; left: 3rem; font-size: 3rem; }
+    .vallomas__sparkle--br { bottom: 2.5rem; right: 3rem; }
+    .vallomas__inner {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 4rem; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .vallomas .label--white { justify-content: flex-start; }
+    .vallomas .label--white::before,
+    .vallomas .label--white::after { flex: 0 0 28px; }
+    .vallomas__qq {
+      font-family: var(--font-display);
+      font-size: 4.5rem; line-height: .8;
+      color: var(--white); opacity: .25;
+      margin-bottom: .5rem;
+    }
+    .vallomas__quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem,2.4vw,1.75rem);
+      color: var(--white); line-height: 1.45;
+      margin: 0 0 1.75rem;
+    }
+    .vallomas__quote .accent {
+      font-family: var(--font-accent);
+      font-style: italic;
+      color: var(--yellow);
+    }
+    .vallomas__author {
+      font-size: 13px; font-style: italic;
+      color: rgba(255,255,255,.45);
+    }
+    .vallomas__author strong {
+      font-style: normal; color: rgba(255,255,255,.8);
+    }
+    .vallomas__card {
+      background: var(--paper);
+      border-radius: 20px;
+      aspect-ratio: 3/4;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .vallomas__card-sparkle {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      color: var(--yellow); font-size: 2rem;
+    }
+    .vallomas__card-inner {
+      color: rgba(7,57,80,.2);
+      font-size: 2.5rem;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       05 MÓDSZER
+    ═══════════════════════════════════════════════════════ */
+    .modszer { background: var(--paper); }
+    .modszer .label { justify-content: center; }
+    .modszer__head {
+      text-align: center; max-width: 640px;
+      margin: 0 auto 1.75rem;
+    }
+    .modszer__h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem,4.5vw,3.25rem);
+      line-height: 1.1; color: var(--blue); margin: 0 0 1rem;
+    }
+    .modszer__h2 em {
+      font-family: var(--font-accent);
+      font-style: italic; color: var(--green);
+    }
+    .modszer__sub  { font-size: 15px; color: var(--muted); margin-bottom: .75rem; }
+    .modszer__body { font-size: 15px; color: var(--muted); max-width: 62ch; margin: 0 auto 3rem; text-align: center; }
+
+    /* Accordion */
+    .acc-wrap {
+      max-width: 860px; margin: 0 auto 2.5rem;
+      display: flex; flex-direction: column; gap: 0;
+      position: relative;
+    }
+    /* dashed vertical connector */
+    .acc-wrap::before {
+      content: '';
+      position: absolute;
+      left: 28px; top: 56px; bottom: 56px;
+      width: 1px;
+      background: repeating-linear-gradient(
+        to bottom, rgba(7,57,80,.2) 0 6px, transparent 6px 12px
+      );
+      z-index: 0;
+    }
+    .acc-item {
+      position: relative; z-index: 1;
+      margin-bottom: 12px;
+    }
+    .acc-trigger {
+      width: 100%; background: var(--white); border: none;
+      border-radius: 14px;
+      padding: 18px 20px 18px 80px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; cursor: pointer;
+      font-family: var(--font-body); color: var(--blue);
+      box-shadow: 0 2px 12px rgba(7,57,80,.06);
+      text-align: left;
+      transition: background .25s, box-shadow .25s;
+      position: relative;
+    }
+    .acc-trigger:hover { box-shadow: 0 4px 20px rgba(7,57,80,.1); }
+    .acc-num {
+      position: absolute; left: 18px; top: 50%; transform: translateY(-50%);
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(7,57,80,.08);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 600; color: var(--blue);
+      transition: background .25s, color .25s;
+      flex-shrink: 0;
+    }
+    .acc-title { font-size: 15px; font-weight: 600; color: var(--blue); }
+    .acc-subtitle { font-size: 12px; color: var(--muted); margin-top: 2px; font-style: italic; }
+    .acc-icon {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1.5px solid rgba(7,57,80,.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: var(--muted); flex-shrink: 0;
+      transition: transform .3s var(--ease-soft), border-color .25s, background .25s;
+    }
+    /* open state */
+    .acc-item.open .acc-trigger {
+      background: var(--green);
+      border-radius: 14px 14px 0 0;
+      box-shadow: none;
+    }
+    .acc-item.open .acc-title,
+    .acc-item.open .acc-subtitle { color: rgba(255,255,255,.9); }
+    .acc-item.open .acc-num {
+      background: rgba(255,222,89,.25);
+      color: var(--yellow);
+    }
+    .acc-item.open .acc-icon {
+      background: rgba(255,222,89,.2);
+      border-color: rgba(255,222,89,.4);
+      color: var(--yellow);
+      transform: rotate(45deg);
+    }
+    /* panel */
+    .acc-panel {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s var(--ease-soft);
+    }
+    .acc-item.open .acc-panel { max-height: 700px; }
+    .acc-panel-inner {
+      background: var(--green);
+      border-radius: 0 0 14px 14px;
+      padding: 4px 20px 22px calc(80px);
+      color: rgba(255,255,255,.8);
+      font-size: 14px; line-height: 1.75;
+    }
+    .acc-meta {
+      font-size: 10px; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: rgba(255,222,89,.7);
+      margin-bottom: .75rem;
+    }
+    .acc-list {
+      list-style: none; padding: 0; margin: 0 0 .75rem;
+      display: flex; flex-direction: column; gap: .4rem;
+    }
+    .acc-list li {
+      display: flex; gap: .6rem; align-items: flex-start;
+    }
+    .acc-list li::before {
+      content: '✦';
+      color: var(--yellow); font-size: .7rem; flex-shrink: 0;
+      margin-top: .3em;
+    }
+    .acc-after {
+      font-family: var(--font-accent);
+      font-style: italic; color: var(--yellow);
+      font-size: 14px; margin-top: .5rem;
+    }
+    .acc-deliverable {
+      margin-top: .75rem;
+      font-size: 11px; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: rgba(255,222,89,.8);
+    }
+    .acc-deliverable::before { content: '✦  Deliverable: '; }
+    .modszer__cta { text-align: center; }
+
+    /* ═══════════════════════════════════════════════════════
+       06 CSOMAGOK
+    ═══════════════════════════════════════════════════════ */
+    .csomagok { background: var(--white); }
+    .csomagok .label { justify-content: center; }
+    .csomagok__head { text-align: center; margin-bottom: 3.5rem; }
+    .csomagok__h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem,4.5vw,3.25rem);
+      line-height: 1.1; color: var(--blue); margin: 0 0 .75rem;
+    }
+    .csomagok__h2 em {
+      font-family: var(--font-accent);
+      font-style: italic; color: var(--green);
+    }
+    .csomagok__sub { font-size: 15px; color: var(--muted); max-width: 50ch; margin: 0 auto; }
+    .pkg-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; align-items: start;
+    }
+    .pkg-card {
+      background: var(--paper);
+      border: 1.5px solid rgba(7,57,80,.1);
+      border-radius: 18px; padding: 2rem 1.75rem;
+      position: relative;
+      transition: box-shadow .3s, transform .3s;
+    }
+    .pkg-card:hover { box-shadow: 0 12px 40px rgba(7,57,80,.1); }
+    .pkg-card--feat {
+      background: var(--green);
+      border-color: var(--green);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 56px rgba(0,89,77,.22);
+    }
+    .pkg-card--feat:hover {
+      transform: translateY(-14px);
+      box-shadow: 0 28px 64px rgba(0,89,77,.28);
+    }
+    .pkg-badge {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--yellow); color: var(--blue);
+      font-size: 10px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: 4px 14px; border-radius: 999px;
+      white-space: nowrap;
+    }
+    .pkg-tag-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: .5rem;
+    }
+    .pkg-num {
+      font-size: 10px; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .pkg-card--feat .pkg-num { color: rgba(255,255,255,.5); }
+    .pkg-badge-inline {
+      font-size: 9px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; background: rgba(7,57,80,.08);
+      color: var(--blue); padding: 3px 10px; border-radius: 999px;
+    }
+    .pkg-card--feat .pkg-badge-inline { background: rgba(255,222,89,.2); color: var(--yellow); }
+    .pkg-name {
+      font-family: var(--font-display);
+      font-size: 1.35rem; color: var(--blue);
+      margin: 0 0 .25rem;
+    }
+    .pkg-card--feat .pkg-name { color: var(--white); }
+    .pkg-tagline { font-size: 12px; color: var(--muted); margin-bottom: 1.5rem; }
+    .pkg-card--feat .pkg-tagline { color: rgba(255,255,255,.6); }
+    .pkg-price {
+      font-family: var(--font-display);
+      font-size: 2.25rem; line-height: 1; color: var(--blue); margin-bottom: .25rem;
+    }
+    .pkg-card--feat .pkg-price { color: var(--white); }
+    .pkg-price-curr {
+      font-family: var(--font-body); font-size: 1rem; font-weight: 400;
+    }
+    .pkg-price-note { font-size: 11px; color: var(--muted); margin-bottom: 1.5rem; }
+    .pkg-card--feat .pkg-price-note { color: rgba(255,255,255,.45); }
+    .pkg-div {
+      border: none; border-top: 1px solid rgba(7,57,80,.1);
+      margin: 1.5rem 0;
+    }
+    .pkg-card--feat .pkg-div { border-color: rgba(255,255,255,.15); }
+    .pkg-feats {
+      list-style: none; padding: 0; margin: 0 0 2rem;
+      display: flex; flex-direction: column; gap: .6rem;
+    }
+    .pkg-feats li {
+      font-size: 13px; color: var(--blue);
+      display: flex; gap: .6rem; align-items: flex-start;
+    }
+    .pkg-card--feat .pkg-feats li { color: rgba(255,255,255,.85); }
+    .pkg-feats li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    .pkg-card--feat .pkg-feats li::before { color: var(--yellow); }
+    .pkg-cta {
+      display: block; width: 100%; text-align: center;
+      padding: 12px; border-radius: 999px;
+      font-family: var(--font-body); font-size: 14px; font-weight: 500;
+      cursor: pointer; border: 1.5px solid rgba(7,57,80,.18);
+      background: transparent; color: var(--blue);
+      transition: border-color .2s, color .2s;
+      text-decoration: none;
+    }
+    .pkg-cta:hover { border-color: var(--blue); }
+    .pkg-cta--feat { background: var(--yellow); color: var(--blue); border-color: var(--yellow); }
+    .pkg-cta--feat:hover { background: #f5d143; }
+
+    /* ═══════════════════════════════════════════════════════
+       07 KOMPATIBILITÁS
+    ═══════════════════════════════════════════════════════ */
+    .kompatibilis { background: var(--paper); }
+    .kompatibilis__inner {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 5rem; align-items: center;
+    }
+    .kompatibilis__h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem,3.5vw,2.75rem);
+      line-height: 1.15; color: var(--blue); margin: 0 0 .75rem;
+    }
+    .kompatibilis__h2 em {
+      font-family: var(--font-accent);
+      font-style: italic; color: var(--green);
+    }
+    .kompatibilis__sub {
+      font-size: 15px; color: var(--muted); margin-bottom: 0;
+    }
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .75rem; margin-bottom: 1.25rem;
+    }
+    .tool-chip {
+      background: var(--white);
+      border: 1px solid rgba(7,57,80,.1);
+      border-radius: 12px; padding: 1.1rem .75rem .9rem;
+      display: flex; flex-direction: column; align-items: center; gap: .55rem;
+      font-size: 11px; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--blue);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .tool-chip:hover { box-shadow: 0 4px 16px rgba(7,57,80,.1); transform: translateY(-2px); }
+    .tool-chip img { width: 32px; height: 32px; display: block; }
+    [data-theme="dark"] .tool-chip img { filter: brightness(0) invert(1); opacity: .75; }
+    .kompatibilis__fine {
+      font-size: 12px; font-style: italic; color: var(--muted); opacity: .75;
+    }
+    .kompatibilis__fine::before { content: '+ '; }
+    .kompatibilis__divider {
+      border: none; border-top: 1px solid rgba(7,57,80,.1);
+      margin: 2rem 0 1rem;
+      grid-column: 1 / -1;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       08 GARANCIA
+    ═══════════════════════════════════════════════════════ */
+    .garancia {
+      background: var(--green);
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    .garancia__sparkle {
+      position: absolute; color: var(--yellow); opacity: .18;
+      font-size: 5rem; user-select: none; pointer-events: none;
+    }
+    .garancia__sparkle--tl { top: 3rem; left: 4rem; }
+    .garancia__sparkle--tr { top: 2.5rem; right: 4rem; }
+    .garancia__sparkle--bl { bottom: 3rem; left: 6rem; font-size: 2.5rem; }
+    .garancia__inner { position: relative; z-index: 1; }
+    .garancia .label { justify-content: center; }
+    .garancia__h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem,5vw,3.75rem);
+      color: var(--white); line-height: 1.1;
+      max-width: 24ch; margin: 0 auto 1.25rem;
+    }
+    .garancia__h2 em {
+      font-family: var(--font-accent);
+      font-style: italic; color: var(--yellow);
+    }
+    .garancia__sub {
+      font-size: 16px; color: rgba(255,255,255,.65);
+      max-width: 52ch; margin: 0 auto 3.5rem;
+    }
+    .garancia__stats {
+      display: flex; justify-content: center; gap: 4rem;
+      flex-wrap: wrap; margin-bottom: 3rem;
+    }
+    .garancia__stat-num {
+      font-family: var(--font-display);
+      font-size: 3rem; color: var(--yellow); line-height: 1;
+    }
+    .garancia__stat-label {
+      font-size: 10px; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: rgba(255,255,255,.4);
+      margin-top: 5px; max-width: 18ch;
+    }
+    .garancia__checklist {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: .7rem 2.5rem;
+      max-width: 660px;
+      margin: 0 auto 3rem;
+      text-align: left;
+    }
+    .garancia__check-item {
+      display: flex; align-items: flex-start; gap: .55rem;
+      font-size: 14px; color: rgba(255,255,255,.82); line-height: 1.45;
+    }
+    .garancia__check-icon {
+      color: var(--yellow); font-size: .95rem; flex-shrink: 0; margin-top: 2px;
+    }
+    @media (max-width: 540px) {
+      .garancia__checklist { grid-template-columns: 1fr; }
+    }
+    .garancia__actions {
+      display: flex; justify-content: center;
+      gap: 1rem; flex-wrap: wrap;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       09 GYIK
+    ═══════════════════════════════════════════════════════ */
+    .gyik { background: var(--paper); }
+    .gyik .label { justify-content: center; }
+    .gyik__head { text-align: center; margin-bottom: 3rem; }
+    .gyik__h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem,4.5vw,3.25rem);
+      color: var(--blue); margin: 0;
+    }
+    .gyik__h2 em {
+      font-family: var(--font-accent);
+      font-style: italic; color: var(--green);
+    }
+    .gyik-list {
+      max-width: 860px; margin: 0 auto;
+    }
+    .gyik-item { border-bottom: 1px solid rgba(7,57,80,.1); }
+    .gyik-item:first-child { border-top: 1px solid rgba(7,57,80,.1); }
+    .gyik-trigger {
+      width: 100%; background: none; border: none;
+      padding: 1.25rem 0;
+      display: flex; align-items: flex-start; gap: 1.25rem;
+      cursor: pointer; text-align: left;
+    }
+    .gyik-trigger:hover .gyik-q { opacity: .75; }
+    .gyik-n {
+      font-size: 11px; font-weight: 600; letter-spacing: .08em;
+      color: var(--muted); flex-shrink: 0; width: 28px;
+      padding-top: 3px;
+    }
+    .gyik-q {
+      font-family: var(--font-display);
+      font-size: clamp(.95rem,2vw,1.15rem);
+      color: var(--blue); flex: 1; line-height: 1.3;
+      transition: opacity .2s;
+    }
+    .gyik-chevron {
+      flex-shrink: 0; font-size: 1rem; color: var(--muted);
+      transition: transform .3s var(--ease-soft);
+      padding-top: 3px;
+    }
+    .gyik-item.open .gyik-chevron { transform: rotate(180deg); color: var(--green); }
+    .gyik-item.open .gyik-q { color: var(--green); }
+    .gyik-panel {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s var(--ease-soft);
+    }
+    .gyik-item.open .gyik-panel { max-height: 500px; }
+    .gyik-answer {
+      padding: 0 0 1.5rem calc(28px + 1.25rem);
+      font-size: 14px; color: var(--muted); line-height: 1.8;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════ */
+    .footer {
+      background: var(--blue);
+      color: rgba(255,255,255,.7);
+      padding: 4rem 0 0;
+    }
+    .footer__inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1.2fr;
+      gap: 3rem; padding-bottom: 3rem;
+    }
+    .navbar__logo-fallback {
+      font-family: var(--font-display);
+      font-size: 1.1rem; color: var(--white);
+      display: flex; flex-direction: column; gap: 3px;
+      margin-bottom: 1rem;
+    }
+    .navbar__logo-fallback span {
+      font-family: var(--font-accent);
+      font-style: italic; font-size: .85rem;
+      color: rgba(255,255,255,.45);
+    }
+    .footer__brand p {
+      font-size: 13px; line-height: 1.65;
+      color: rgba(255,255,255,.45); max-width: 34ch;
+    }
+    .footer__heading {
+      font-size: 10px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: rgba(255,255,255,.3);
+      margin: 0 0 1rem;
+    }
+    .footer__links {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: .55rem;
+    }
+    .footer__links a {
+      font-size: 13px; color: rgba(255,255,255,.6);
+      transition: color .2s;
+    }
+    .footer__links a:hover { color: var(--white); }
+    .footer__social {
+      display: flex; gap: .65rem; margin-top: .5rem;
+    }
+    .footer__social-link {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.15);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.55);
+      transition: border-color .2s, color .2s;
+    }
+    .footer__social-link:hover { border-color: rgba(255,255,255,.7); color: var(--white); }
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 1.5rem 0;
+      font-size: 12px; color: rgba(255,255,255,.28);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .hero__inner { grid-template-columns: 1fr 420px; gap: 2.5rem; }
+      .kompatibilis__inner { grid-template-columns: 300px 1fr; gap: 3rem; }
+    }
+    @media (max-width: 880px) {
+      .hero__inner { grid-template-columns: 1fr; }
+      .hero__card { max-width: 400px; margin: 0 auto; animation: none; }
+      .vallomas__inner { grid-template-columns: 1fr; }
+      .vallomas__card { display: none; }
+      .kompatibilis__inner { grid-template-columns: 1fr; }
+      .tool-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .kalkulator__stats { flex-direction: column; gap: 2rem; }
+      .kalkulator__stat { border-right: none; border-bottom: 1px solid rgba(7,57,80,.12); padding: 0 0 2rem; }
+      .kalkulator__stat:last-child { border-bottom: none; }
+      .pkg-grid { grid-template-columns: repeat(2, 1fr); }
+      .pkg-card--feat { transform: none; }
+      .pkg-card--feat:hover { transform: translateY(-4px); }
+      .footer__inner { grid-template-columns: 1fr 1fr; }
+      .garancia__stats { gap: 2rem; }
+    }
+    @media (max-width: 480px) {
+      :root { --px: 18px; }
+      .pkg-grid { grid-template-columns: 1fr; }
+      .tool-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer__inner { grid-template-columns: 1fr; }
+      .footer__bottom { flex-direction: column; }
+      .hero__stats { gap: 1.5rem; }
+      .garancia__stats { flex-direction: column; align-items: center; gap: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══════════════════════════════════════════════ -->
+<nav class="pe-nav" id="peNav">
+  <div class="pe-nav__inner">
+
+    <a class="pe-nav__brand" href="#top" aria-label="Perpetuum Essence">
+      <img src="logo.png" alt="">
+      <div class="pe-nav__wordmark">
+        <span class="pe-nav__wordmark-main">Perpetuum <em>Essence</em></span>
+        <span class="pe-nav__subname">Árgyelán Dorina</span>
+      </div>
+    </a>
+
+    <div class="pe-nav__right">
+      <button class="pe-nav__theme" id="themeToggle" aria-label="Téma váltás">🌙</button>
+
+      <a class="pe-nav__cta" href="#kalkulátor">Tartalom-automatizálás kalkulátor →</a>
+
+      <a class="pe-nav__icon" href="#" aria-label="Bejelentkezés">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+        </svg>
+      </a>
+
+      <a class="pe-nav__icon" href="#" aria-label="Kosár">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+      </a>
+
+      <button class="pe-nav__burger" id="burgerBtn" aria-label="Menü megnyitása" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6"  x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- ═══ MOBILE OVERLAY ════════════════════════════════════════ -->
+<div class="mob-overlay" id="mobOverlay" role="dialog" aria-modal="true" aria-label="Navigáció">
+  <button class="mob-overlay__close" id="overlayClose" aria-label="Bezárás">✕</button>
+  <ul class="mob-overlay__links">
+    <li><a href="muhely.html">Műhely</a></li>
+    <li><a href="#csomagok">Workshopok</a></li>
+    <li><a href="#modszer">Kurzus</a></li>
+    <li><a href="rolam.html">Rólam</a></li>
+    <li><a href="mailto:hello@perpetuumessence.hu">Kapcsolat</a></li>
+  </ul>
+  <a href="#csomagok" class="mob-overlay__cta">Jelentkezés</a>
+</div>
+
+<!-- ═══ STICKY CTA BAR ═══════════════════════════════════════ -->
+<div class="sticky-bar" id="stickyBar" aria-live="polite">
+  <span class="sticky-bar__dot" aria-hidden="true"></span>
+  <span class="sticky-bar__brand">Perpetuum Essence</span>
+  <span class="sticky-bar__sep">·</span>
+  <span>Következő workshop: 2026 ősz</span>
+  <a class="sticky-bar__btn" href="#csomagok">Jelentkezem →</a>
+</div>
+
+<main id="top">
+
+<!-- ═══════════════════════════════════════════════════════════
+     01 · HERO
+════════════════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero__inner">
+
+    <div class="fi">
+      <div class="hero__label-row">
+        <span class="hero__label-line"></span>
+        <span>PERPETUUM ESSENCE</span>
+        <span class="hero__label-sep">·</span>
+        <span>A MÓDSZER</span>
+        <span class="hero__label-sep">·</span>
+        <span>Ősz 2026</span>
+      </div>
+
+      <h1 class="hero__h1">Írj egyszer és legyél rendszeresen jelen mindenhol.</h1>
+
+      <em class="hero__sub">azoknak, akik nem akarnak full-time marketingesek lenni</em>
+
+      <p class="hero__body">Szakértőknek és kisvállalkozásoknak, akik szeretnék automatizálni a tartalomkészítést — anélkül, hogy elveszítenék a saját hangjukat. Claude AI és Make segítségével.</p>
+
+      <div class="hero__stats">
+        <div>
+          <div class="hero__stat-num">1</div>
+          <div class="hero__stat-label">Forrás</div>
+        </div>
+        <div>
+          <div class="hero__stat-num">5+</div>
+          <div class="hero__stat-label">Platform</div>
+        </div>
+        <div>
+          <div class="hero__stat-num">1 óra</div>
+          <div class="hero__stat-label">Heti ráfordítás</div>
+        </div>
+        <div>
+          <div class="hero__stat-num">12</div>
+          <div class="hero__stat-label">Havi darab</div>
+        </div>
+      </div>
+
+      <div class="hero__actions">
+        <a class="btn btn-yellow" href="#kviz">Megnézem, mennyi időt pazarolok el →</a>
+        <a class="btn btn-text" href="#modszer">A módszer ↓</a>
+      </div>
+
+      <p class="hero__print">
+        <span class="hero__print-dot">✦</span> Heti 1 óra ráfordítás
+        <span class="hero__print-dot">·</span> 0 robotízű poszt
+        <span class="hero__print-dot">·</span> 100% a te hangod
+      </p>
+    </div>
+
+    <div class="hero__card fi" style="transition-delay:.15s">
+
+      <!-- Fejléc -->
+      <div class="card__head">
+        <span class="card__head-label">
+          <span class="card__head-star" aria-hidden="true">✦</span>
+          PERPETUUM ESSENCE · ÉLŐ NÉZET
+        </span>
+        <span class="card__head-time">
+          <span class="card__head-dot"></span>14 perc
+        </span>
+      </div>
+
+      <div class="card__divider"></div>
+
+      <!-- Forrás sáv -->
+      <div class="card__source">
+        <div class="card__source-left">
+          <div class="card__play" aria-hidden="true"></div>
+          <div class="card__source-inner">
+            <span class="card__source-micro">1 FORRÁS</span>
+            <span class="card__source-text">Heti élő videó · 42:18</span>
+          </div>
+        </div>
+        <span class="card__yt">YouTube</span>
+      </div>
+
+      <!-- Szaggatott összekötő fa -->
+      <div style="padding: 0 16px">
+        <!--
+          viewBox: 448×28 (= card body belső szélessége 480-2×16=448)
+          Függőleges szár: középről (224,0)→(224,12)
+          Vízszintes ág: (40,12)→(392,12)
+          5 leágazás az egyes chipek közepe fölé:
+            ×1 BLOGCIKK  ≈ x=40
+            ×3 LINKEDIN  ≈ x=118
+            ×1 HÍRLEVÉL  ≈ x=206
+            ×5 INSTA STORY≈ x=300
+            ×2 YT SHORT  ≈ x=392
+        -->
+        <svg class="card__tree" viewBox="0 0 448 28"
+             preserveAspectRatio="none" aria-hidden="true" focusable="false"
+             xmlns="http://www.w3.org/2000/svg">
+          <!-- szár -->
+          <line x1="224" y1="0"  x2="224" y2="12"
+                stroke="#86C2CC" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <!-- vízszintes összekötő -->
+          <line x1="40"  y1="12" x2="392" y2="12"
+                stroke="#86C2CC" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <!-- 5 leágazás -->
+          <line x1="40"  y1="12" x2="40"  y2="28"
+                stroke="#86C2CC" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <line x1="118" y1="12" x2="118" y2="28"
+                stroke="#86C2CC" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <line x1="206" y1="12" x2="206" y2="28"
+                stroke="#86C2CC" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <line x1="300" y1="12" x2="300" y2="28"
+                stroke="#86C2CC" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <line x1="392" y1="12" x2="392" y2="28"
+                stroke="#86C2CC" stroke-width="1.5" stroke-dasharray="3 3"/>
+        </svg>
+      </div>
+
+      <!-- Chipek + lábléc -->
+      <div class="card__body">
+        <div class="card__chips">
+          <span class="chip">×1 BLOGCIKK</span>
+          <span class="chip">×3 LINKEDIN</span>
+          <span class="chip chip--yellow">×1 HÍRLEVÉL</span>
+          <span class="chip">×5 INSTA STORY</span>
+          <span class="chip">×2 YT SHORT</span>
+        </div>
+        <div class="card__foot">
+          <span class="card__foot-text">⚡ Claude + Make · automatikus</span>
+          <span class="card__foot-num">12 darab havi tartalom</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     02 · KALKULÁTOR
+════════════════════════════════════════════════════════════ -->
+<section class="section kalkulator" id="kalkulátor">
+  <div class="container fi">
+    <div class="label label--center label--no-dash">A KALKULÁTOR</div>
+    <h2 class="kalkulator__h2">Mennyi pénzt hagysz az asztalon<br>a <em>rendszertelen tartalomgyártással</em>?</h2>
+    <p class="kalkulator__sub">A legtöbb szakértő a tudástőkéje 90%-át "elégeti": egy videó vagy cikk kimegy egyszer, aztán elvész a süllyesztőben. Ez nemcsak elpazarolt idő — elveszített ügyfél és profit is.</p>
+
+    <div class="kalkulator__stats">
+      <div class="kalkulator__stat">
+        <div class="kalkulator__stat-num">~144 óra</div>
+        <div class="kalkulator__stat-label">Évente elpazarolt szakértői idő</div>
+      </div>
+      <div class="kalkulator__stat">
+        <div class="kalkulator__stat-num">800e Ft+</div>
+        <div class="kalkulator__stat-label">Év elveszett bevétel (medián)</div>
+      </div>
+      <div class="kalkulator__stat">
+        <div class="kalkulator__stat-num">1 → 12</div>
+        <div class="kalkulator__stat-label">Forrásból havi tartalom</div>
+      </div>
+    </div>
+
+    <p class="kalkulator__intro">Töltsd ki — 2 perc, és megmutatjuk a te veszteségedet.</p>
+
+    <div class="tally-placeholder">
+      <h3 style="font-family:'Yeseva One',serif; font-size:1.4rem; color:#073950; margin:0 0 1rem; line-height:1.3;">Mennyi pénzt hagysz az asztalon<br>a rendszertelen tartalomgyártással?</h3>
+      <p style="margin:0;opacity:.6"><div class="tally-wrapper">
+  <div class="tally-cover" id="tallyCover">
+    <p class="tally-cover__text">2 perc, és látod a számokat</p>
+    <button class="btn btn--yellow" onclick="document.getElementById('tallyCover').style.display='none'; document.getElementById('tallyEmbed').style.display='block';">
+      Kiszámolom →
+    </button>
+  </div>
+  <div id="tallyEmbed" style="display:none;">
+    <iframe data-tally-src="https://tally.so/embed/PdGOPB?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0" title="Tartalom-veszteség kalkulátor"></iframe>
+    <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     03 · KÖVETKEZMÉNY
+════════════════════════════════════════════════════════════ -->
+<section class="consequence">
+  <div class="container">
+    <h2 class="consequence__h2 fi">Látod a számokat? Ezért érzed, hogy <em>rabszolgája</em> vagy a saját marketingednek.</h2>
+
+    <div class="consequence__grid fi" style="transition-delay:.1s">
+
+      <div class="consequence__card">
+        <span class="consequence__icon">🔥</span>
+        <h3 class="consequence__card-h">A tartalmaid 90%-a elég el</h3>
+        <p>Minden poszt, videó, cikk egyszeri életű. Kimegy egyszer, aztán örökre eltűnik a feedből — hiába dolgoztál rajta órákat.</p>
+      </div>
+
+      <div class="consequence__card">
+        <span class="consequence__icon">⏱</span>
+        <h3 class="consequence__card-h">Minden héten nulláról kezded</h3>
+        <p>Nincs rendszer, nincs sablon. Minden poszt újabb döntés, újabb energiabefektetés — még akkor is, ha már megírtad ugyanazt másképp.</p>
+      </div>
+
+      <div class="consequence__card">
+        <span class="consequence__icon">📉</span>
+        <h3 class="consequence__card-h">A jelenlét döcög</h3>
+        <p>Hetekig csend, majd hirtelen sok tartalom. Az algoritmus és a közönséged egyaránt bünteti az egyenetlen megjelenést.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     04 · VALLOMÁS
+════════════════════════════════════════════════════════════ -->
+<section class="section vallomas" id="vallomas">
+  <span class="vallomas__sparkle vallomas__sparkle--tl" aria-hidden="true">✦</span>
+  <span class="vallomas__sparkle vallomas__sparkle--br" aria-hidden="true">✦</span>
+  <div class="container">
+    <div class="vallomas__inner fi">
+
+      <div>
+        <div class="label label--white">AZ ŐSZINTE VALLOMÁS</div>
+        <div class="vallomas__qq" aria-hidden="true">❝</div>
+        <blockquote class="vallomas__quote">
+          Ott van nálam is egy mappa tele vázlatokkal. Hírlevél-ötletek, poszt captionök, témák amikről tudnám, hogy érdekelnék az olvasóimat.<br><br>
+          SEO szövegíróként pontosan tudom, mit kellene csinálni. Mégis hónapokat hagytam ki — nem azért, mert nem volt mondanivalóm, hanem mert a vágásra, a kreatívok összerakására, az aprólékos szerkesztésre egyszerűen nem maradt idő a határidős munkák mellett.<br><br>
+          Akkor jöttem rá: nem akaraterő kell. <span class="accent">Rendszer kell.</span> Olyan, ami a vázlatból kész tartalmat csinál — anélkül, hogy órákat kelljen Canvában szenvedni.
+        </blockquote>
+        <p class="vallomas__author"><strong>Árgyelán Dorina</strong> · SEO szövegíró &amp; tartalom-stratéga</p>
+      </div>
+
+      <div class="vallomas__card">
+  <img src="assets/dorina.jpg" alt="Árgyelán Dorina" style="width:100%; height:100%; object-fit:cover; border-radius:20px;">
+</div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     05 · MÓDSZER
+════════════════════════════════════════════════════════════ -->
+<section class="section modszer" id="modszer">
+  <div class="container">
+    <div class="modszer__head fi">
+      <div class="label">A PERPETUUM ESSENCE PROGRAM</div>
+      <h2 class="modszer__h2">Építsük meg<br><em>a te rendszeredet.</em></h2>
+      <p class="modszer__sub">Ez nem egy újabb marketinges módszer — de segít abban, hogy rendszeresen jelen legyél anélkül, hogy az egész életedet felemésztse.</p>
+    </div>
+    <p class="modszer__body fi" style="transition-delay:.1s">Egyetlen dolgot csinálsz: megírsz vagy felrögzítesz valamit, ami fontos neked. Egy blogcikket, egy videót, egy hangjegyzetet. A többit megoldjuk együtt — Claude a te stílusodban írja tovább, Make.com szétterjeszti a platformjaidra. Te meg csinálod azt, amiben valóban jó vagy.</p>
+
+    <div class="acc-wrap fi" style="transition-delay:.15s">
+
+      <div class="acc-item" id="acc1">
+        <button class="acc-trigger" aria-expanded="false">
+          <span class="acc-num">01</span>
+          <div>
+            <div class="acc-title">Honnan legyen mindig miről írni? Soha többé fehér lap szindróma</div>
+          </div>
+          <span class="acc-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <p>Tartalompillérek, kulcsszókutatás, ötletbank felépítése.</p>
+            <p class="acc-deliverable">3 hónapra elegendő tématerv</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item open" id="acc2">
+        <button class="acc-trigger" aria-expanded="true">
+          <span class="acc-num">02</span>
+          <div>
+            <div class="acc-title">A te hangod, digitálisan</div>
+            <div class="acc-subtitle">Claude projekt felépítése</div>
+          </div>
+          <span class="acc-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="acc-panel" style="max-height:700px">
+          <div class="acc-panel-inner">
+            <p class="acc-meta">~120 PERC · CLAUDE PROJECTS SETUP</p>
+            <ul class="acc-list">
+              <li>Stílus-DNS dokumentum: a te saját mondatszerkezeted, kedvelt fordulataid, kerülendő kifejezéseid</li>
+              <li>5 sablon-prompt — blogcikk, hírlevél, LinkedIn, Insta caption, YouTube leírás</li>
+              <li>Önellenőrző "robotízű-szűrő" — minden output átmegy rajta</li>
+            </ul>
+            <p class="acc-after">→ Ezután: kérdezel, ír. Mindig a te hangodon.</p>
+            <p class="acc-deliverable">működő Claude projekt</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item" id="acc3">
+        <button class="acc-trigger" aria-expanded="false">
+          <span class="acc-num">03</span>
+          <div>
+            <div class="acc-title">Egyszer írod, mindenhol megjelenik</div>
+            <div class="acc-subtitle">Újrahasznosítás logikája</div>
+          </div>
+          <span class="acc-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <p>Mi megy hova, milyen formátumban — a teljes platform-térkép.</p>
+            <p class="acc-deliverable">saját platform-térkép</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item" id="acc4">
+        <button class="acc-trigger" aria-expanded="false">
+          <span class="acc-num">04</span>
+          <div>
+            <div class="acc-title">Az automatizálás alapjai</div>
+            <div class="acc-subtitle">Make.com első lépések</div>
+          </div>
+          <span class="acc-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <p>Hogyan gondolkodj folyamatokban — az első saját scenario beállítása.</p>
+            <p class="acc-deliverable">első működő Make scenario</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item" id="acc5">
+        <button class="acc-trigger" aria-expanded="false">
+          <span class="acc-num">05</span>
+          <div>
+            <div class="acc-title">Blog → hírlevél + social automatán</div>
+            <div class="acc-subtitle">A teljes pipeline beépítése</div>
+          </div>
+          <span class="acc-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <p>Összekötjük a rendszereidet, hogy a tartalom magától áramoljon a platformok között.</p>
+            <p class="acc-deliverable">működő automatizálás</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item" id="acc6">
+        <button class="acc-trigger" aria-expanded="false">
+          <span class="acc-num">06</span>
+          <div>
+            <div class="acc-title">Canva + vizualizáció automatán</div>
+            <div class="acc-subtitle">Brandkit, sablonok, automatikus képgenerálás</div>
+          </div>
+          <span class="acc-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <p>Canva + Make összekötve — a kreatívok is maguktól készülnek.</p>
+            <p class="acc-deliverable">Canva + Make összekötve</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item" id="acc7">
+        <button class="acc-trigger" aria-expanded="false">
+          <span class="acc-num">07</span>
+          <div>
+            <div class="acc-title">A fenntartható heti rutin</div>
+            <div class="acc-subtitle">Heti 1 óra, és kész a hónap</div>
+          </div>
+          <span class="acc-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <p>Ütemezés, tartalomtár, mérés — kapsz egy "gépkönyvet", amivel menedzselheted a teljes havi jelenlétedet.</p>
+            <p class="acc-deliverable">üzemeltetési SOP dokumentum</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="modszer__cta fi" style="transition-delay:.2s">
+      <a class="btn btn-yellow" href="#csomagok">Megnézem a csomagokat →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     06 · CSOMAGOK
+════════════════════════════════════════════════════════════ -->
+<section class="section csomagok" id="csomagok">
+  <div class="container">
+    <div class="csomagok__head fi">
+      <div class="label">A CSOMAGOK</div>
+      <h2 class="csomagok__h2">Három út, <em>egy rendszer.</em></h2>
+      <p class="csomagok__sub">Mindhárom csomag ugyanarra az eredményre vezet — válaszd azt, amelyik a legjobban illik hozzád.</p>
+    </div>
+
+    <div class="pkg-grid fi" style="transition-delay:.1s">
+
+      <!-- Nº 02 Workshop -->
+      <div class="pkg-card">
+        <div class="pkg-tag-row">
+          <span class="pkg-num">Csomag Nº 02</span>
+          <span class="pkg-badge-inline">WORKSHOP</span>
+        </div>
+        <h3 class="pkg-name">Egy alkalom — kóstoló</h3>
+        <p class="pkg-tagline">Egy 90 perces workshop az első modulból — önállóan.</p>
+        <div class="pkg-price">49 000 <span class="pkg-price-curr">Ft</span></div>
+        <p class="pkg-price-note">egy összegben · áfa-mentes</p>
+        <hr class="pkg-div">
+        <ul class="pkg-feats">
+          <li>Az első modul (Honnan legyen mindig miről írni?) önállóan</li>
+          <li>Témakör-bank sablon + 1× élő alkalmazás</li>
+          <li>Felvétel utólag is megnézhető 30 napig</li>
+        </ul>
+        <a class="pkg-cta" href="mailto:hello@perpetuumessence.hu">Jelentkezés +</a>
+      </div>
+
+      <!-- Nº 03 Program (featured) -->
+      <div class="pkg-card pkg-card--feat">
+        <div class="pkg-badge">EZT VÁLASZTJÁK</div>
+        <div class="pkg-tag-row">
+          <span class="pkg-num">Csomag Nº 03</span>
+          <span class="pkg-badge-inline">A TELJES PROGRAM</span>
+        </div>
+        <h3 class="pkg-name">Tartalom-Vízesés Program</h3>
+        <p class="pkg-tagline">7 alkalmas workshop sorozat — beépítjük a rendszert a te vállalkozásodba.</p>
+        <div class="pkg-price">159 000 <span class="pkg-price-curr" style="color:rgba(255,255,255,.5)">Ft</span></div>
+        <p class="pkg-price-note">egy összegben · áfa-mentes</p>
+        <hr class="pkg-div">
+        <ul class="pkg-feats">
+          <li>Mind a 7 modul élőben + felvételek</li>
+          <li>Személyes Claude projekt + Make scenario</li>
+          <li>Minden alkalom végén 30 perces kérdezz-felelek</li>
+          <li>Üzemeltetési "gépkönyv" PDF + Notion sablon</li>
+          <li>A vásárlás pillanatától elérhető a videós kurzus</li>
+        </ul>
+        <a class="pkg-cta pkg-cta--feat" href="mailto:hello@perpetuumessence.hu">Jelentkezés +</a>
+      </div>
+
+      <!-- Nº 04 VIP -->
+      <div class="pkg-card">
+        <div class="pkg-tag-row">
+          <span class="pkg-num">Csomag Nº 04</span>
+          <span class="pkg-badge-inline">VIP · 1-ON-1</span>
+        </div>
+        <h3 class="pkg-name">VIP — testreszabott</h3>
+        <p class="pkg-tagline">A teljes Program + egyéni, négyszemközti implementáció.</p>
+        <div class="pkg-price">219 000 <span class="pkg-price-curr">Ft</span></div>
+        <p class="pkg-price-note">egy összegben · áfa-mentes</p>
+        <hr class="pkg-div">
+        <ul class="pkg-feats">
+          <li>Minden, ami a Program csomagban</li>
+          <li>2× 60 perces 1-on-1 implementációs session</li>
+          <li>Egyedi Make scenario a meglévő eszközeidhez</li>
+          <li>Soron kívüli email-támogatás</li>
+        </ul>
+        <a class="pkg-cta" href="mailto:hello@perpetuumessence.hu">Jelentkezés +</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     07 · KOMPATIBILITÁS
+════════════════════════════════════════════════════════════ -->
+<section class="section kompatibilis" id="kompatibilis">
+  <div class="container">
+    <div class="kompatibilis__inner fi">
+
+      <div>
+        <div class="label label--no-dash">KOMPATIBILITÁS</div>
+        <h2 class="kompatibilis__h2">A te eszközeiddel is <em>működik.</em></h2>
+        <p class="kompatibilis__sub">Nem váltasz rendszert. A Perpetuum Essence rákapcsolódik a stackedre — bárminek hívják.</p>
+      </div>
+
+      <div>
+        <div class="tool-grid">
+          <div class="tool-chip">
+            <img src="https://cdn.simpleicons.org/wordpress/073950" alt="" aria-hidden="true" loading="lazy">
+            <span>WordPress</span>
+          </div>
+          <div class="tool-chip">
+            <img src="assets/linkedin-app-icon.svg" alt="" aria-hidden="true" loading="lazy" width="32" height="32">
+            <span>LinkedIn</span>
+          </div>
+          <div class="tool-chip">
+            <img src="https://cdn.simpleicons.org/facebook/073950" alt="" aria-hidden="true" loading="lazy">
+            <span>Facebook</span>
+          </div>
+          <div class="tool-chip">
+            <img src="assets/MailerLite_Logo.svg" alt="" aria-hidden="true" loading="lazy" style="width:120px; height:auto">
+            <span>MailerLite</span>
+          </div>
+          <div class="tool-chip">
+            <img src="https://cdn.simpleicons.org/googledrive/073950" alt="" aria-hidden="true" loading="lazy">
+            <span>Google Drive</span>
+          </div>
+          <div class="tool-chip">
+            <img src="assets/canva-icon.svg" alt="" aria-hidden="true" loading="lazy" width="32" height="32">
+            <span>Canva</span>
+          </div>
+          <div class="tool-chip">
+            <img src="https://cdn.simpleicons.org/youtube/073950" alt="" aria-hidden="true" loading="lazy">
+            <span>YouTube</span>
+          </div>
+          <div class="tool-chip">
+            <img src="https://cdn.simpleicons.org/notion/073950" alt="" aria-hidden="true" loading="lazy">
+            <span>Notion</span>
+          </div>
+        </div>
+        <hr class="kompatibilis__divider">
+        <p class="kompatibilis__fine">Substack, Mailchimp, Buffer, Beehiiv, Webflow, Squarespace és bármi, ami webhook-ot vagy API-t beszél.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     08 · GARANCIA
+════════════════════════════════════════════════════════════ -->
+<section class="section garancia" id="garancia">
+  <span class="garancia__sparkle garancia__sparkle--tl" aria-hidden="true">✦</span>
+  <span class="garancia__sparkle garancia__sparkle--tr" aria-hidden="true">✦</span>
+  <span class="garancia__sparkle garancia__sparkle--bl" aria-hidden="true">✦</span>
+  <div class="container">
+    <div class="garancia__inner fi">
+      <div class="label label--yellow label--center">AMIT KAPSZ</div>
+      <h2 class="garancia__h2">Minden eszköz, rendszer és tudás — amit a <em>program végére</em> kézhez kapsz.</h2>
+      <p class="garancia__sub">Nem elméleti tudás, hanem beüzemelt, működő rendszer — a te üzletedre, a te hangodon.</p>
+
+      <div class="garancia__checklist">
+        <div class="garancia__check-item">
+          <span class="garancia__check-icon">✦</span>
+          <span>Személyre szabott stílus-DNS dokumentum</span>
+        </div>
+        <div class="garancia__check-item">
+          <span class="garancia__check-icon">✦</span>
+          <span>5 sablon-prompt (blog, hírlevél, LinkedIn, Insta, YT)</span>
+        </div>
+        <div class="garancia__check-item">
+          <span class="garancia__check-icon">✦</span>
+          <span>Beállított és tesztelt saját Claude projekt</span>
+        </div>
+        <div class="garancia__check-item">
+          <span class="garancia__check-icon">✦</span>
+          <span>3 hónapra elegendő tématerv</span>
+        </div>
+        <div class="garancia__check-item">
+          <span class="garancia__check-icon">✦</span>
+          <span>Személyes Make.com tartalom-automatizálási scenario</span>
+        </div>
+        <div class="garancia__check-item">
+          <span class="garancia__check-icon">✦</span>
+          <span>Saját platform-térkép (mi hova, milyen formátumban)</span>
+        </div>
+        <div class="garancia__check-item">
+          <span class="garancia__check-icon">✦</span>
+          <span>Canva + Make összekötve — kreatívok automatikusan</span>
+        </div>
+        <div class="garancia__check-item">
+          <span class="garancia__check-icon">✦</span>
+          <span>Üzemeltetési „gépkönyv" PDF + Notion sablon</span>
+        </div>
+        <div class="garancia__check-item">
+          <span class="garancia__check-icon">✦</span>
+          <span>7× felvétel — visszanézhető bármikor</span>
+        </div>
+        <div class="garancia__check-item">
+          <span class="garancia__check-icon">✦</span>
+          <span>„Robotízű-szűrő" checklist minden outputhoz</span>
+        </div>
+      </div>
+
+      <div class="garancia__stats">
+        <div>
+          <div class="garancia__stat-num">100%</div>
+          <div class="garancia__stat-label">A te hangod, megírt promptokkal</div>
+        </div>
+        <div>
+          <div class="garancia__stat-num">1 óra</div>
+          <div class="garancia__stat-label">Heti emberi munka, a többit az automatizálás</div>
+        </div>
+        <div>
+          <div class="garancia__stat-num">7 modul</div>
+          <div class="garancia__stat-label">Élőben + felvételként is elérhető</div>
+        </div>
+      </div>
+
+      <div class="garancia__actions">
+        <a class="btn btn-yellow" href="mailto:hello@argyelandorina.com">Jelentkezem a 159 000 Ft-os Programra →</a>
+        <a class="btn btn-ghost-white" href="#csomagok">Megnézem a csomagokat</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     09 · GYIK
+════════════════════════════════════════════════════════════ -->
+<section class="section gyik" id="gyik">
+  <div class="container">
+    <div class="gyik__head fi">
+      <div class="label">GYAKRAN KÉRDEZITEK</div>
+      <h2 class="gyik__h2">Még valami, ami <em>fontos?</em></h2>
+    </div>
+
+    <div class="gyik-list fi" style="transition-delay:.1s">
+
+      <div class="gyik-item open">
+        <button class="gyik-trigger" aria-expanded="true">
+          <span class="gyik-n">01</span>
+          <span class="gyik-q">Tényleg "robotízű" lesz, ha AI-t használok a tartalmakhoz?</span>
+          <span class="gyik-chevron" aria-hidden="true">∨</span>
+        </button>
+        <div class="gyik-panel" style="max-height:500px">
+          <div class="gyik-answer">Nem — ha a Claude projekt jól van felépítve. A Claude-ot a te saját stílus-DNS-edre tanítjuk: a mondatszerkezetedre, a fordulataidra, a kedvelt szóhasználatodra. Plusz minden output átmegy egy "robotízű-szűrőn". A gyakorlatban: a saját olvasóid sem fogják érzékelni, hogy gép segítette a megírást.</div>
+        </div>
+      </div>
+
+      <div class="gyik-item">
+        <button class="gyik-trigger" aria-expanded="false">
+          <span class="gyik-n">02</span>
+          <span class="gyik-q">Mi van, ha nincs videós tartalmam — csak írásban dolgozom?</span>
+          <span class="gyik-chevron" aria-hidden="true">∨</span>
+        </button>
+        <div class="gyik-panel">
+          <div class="gyik-answer">Az is forrás. Egy 2 000 szavas blogcikkből, egy hangjegyzetből, sőt akár egy hosszabb LinkedIn posztból is fel tudjuk építeni a rendszert. Az első modulban közösen eldöntjük, melyik formátum termel neked legtöbb értéket — és arra optimalizálunk.</div>
+        </div>
+      </div>
+
+      <div class="gyik-item">
+        <button class="gyik-trigger" aria-expanded="false">
+          <span class="gyik-n">03</span>
+          <span class="gyik-q">Mennyi idő, mire a rendszer beüzemelődik?</span>
+          <span class="gyik-chevron" aria-hidden="true">∨</span>
+        </button>
+        <div class="gyik-panel">
+          <div class="gyik-answer">A workshopok kéthetente zajlanak, de a vásárlás pillanatától elérhető a teljes videós kurzus, saját tempóban. Minden élő alkalom végén 30 perces kérdezz-felelek van, ahol azonnal tudod tisztázni, ami elakadt.</div>
+        </div>
+      </div>
+
+      <div class="gyik-item">
+        <button class="gyik-trigger" aria-expanded="false">
+          <span class="gyik-n">04</span>
+          <span class="gyik-q">Tényleg elég a heti 1 óra a teljes havi jelenléthez?</span>
+          <span class="gyik-chevron" aria-hidden="true">∨</span>
+        </button>
+        <div class="gyik-panel">
+          <div class="gyik-answer">Igen — a beüzemelés után. A heti 1 óra arra megy el, hogy átolvasd a Claude által megírt kimeneteket, jóváhagyod (vagy finomhangolod), és elindítod a Make scenariot. Az automatizálás intézi a többit: ütemezi, posztolja, archiválja. A minőség-ellenőrzés mindig nálad marad.</div>
+        </div>
+      </div>
+
+      <div class="gyik-item">
+        <button class="gyik-trigger" aria-expanded="false">
+          <span class="gyik-n">05</span>
+          <span class="gyik-q">Milyen plusz eszközöket kell vásárolnom?</span>
+          <span class="gyik-chevron" aria-hidden="true">∨</span>
+        </button>
+        <div class="gyik-panel">
+          <div class="gyik-answer">Két fizetős előfizetést használunk: a Claude Pro-t (kb. 8 000 Ft / hó) és a Make.com-ot (a kezdő terv ingyenes, ha többet kell, ~6 000 Ft / hó). Plusz, ami már megvan nálad: a CMS-ed (pl. WordPress) és a hírlevél-szoftvered (pl. MailerLite). Új rendszerre nincs szükség.</div>
+        </div>
+      </div>
+
+      <div class="gyik-item">
+        <button class="gyik-trigger" aria-expanded="false">
+          <span class="gyik-n">06</span>
+          <span class="gyik-q">Mi van, ha nem értek a Make.com-hoz vagy Claude-hoz?</span>
+          <span class="gyik-chevron" aria-hidden="true">∨</span>
+        </button>
+        <div class="gyik-panel">
+          <div class="gyik-answer">Nem kell, hogy értsd hozzá — a program egész második fele épp a beüzemelésről szól, közösen. A 4. workshop végére kész a Make scenario, az 5. után pedig átveszed a működtetést. Csak az kell, hogy meg akard tanulni az alapokat.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════ -->
+<footer class="footer" id="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <div class="navbar__logo-fallback">
+          Perpetuum Essence
+          <span>Árgyelán Dorina</span>
+        </div>
+        <p>Tartalom-automatizálási workshop sorozat szakértőknek és kisvállalkozásoknak — Claude AI és Make.com segítségével.</p>
+      </div>
+      <div>
+        <p class="footer__heading">Navigáció</p>
+        <ul class="footer__links">
+          <li><a href="#kalkulátor">Kalkulátor</a></li>
+          <li><a href="#modszer">Módszer</a></li>
+          <li><a href="#csomagok">Csomagok</a></li>
+          <li><a href="#gyik">GYIK</a></li>
+          <li><a href="muhely.html">Műhely</a></li>
+          <li><a href="rolam.html">Rólam</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__heading">Kapcsolat</p>
+        <ul class="footer__links">
+          <li><a href="mailto:hello@perpetuumessence.hu">hello@perpetuumessence.hu</a></li>
+          <li><a href="#">Adatkezelési tájékoztató</a></li>
+          <li><a href="#">ÁSZF</a></li>
+        </ul>
+        <p class="footer__heading" style="margin-top:1.5rem">Kövess minket</p>
+        <div class="footer__social">
+  <a href="https://www.instagram.com/szovegbenjovagyok.hu_socialseo/" class="footer__social-link" aria-label="Instagram" target="_blank">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+    </svg>
+  </a>
+  <a href="https://www.facebook.com/profile.php?id=100076366658629" class="footer__social-link" aria-label="Facebook" target="_blank">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+    </svg>
+  </a>
+  <a href="https://www.linkedin.com/in/dorina-%C3%A1rgyel%C3%A1n-a81590218/" class="footer__social-link" aria-label="LinkedIn" target="_blank">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+    </svg>
+  </a>
+</div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2025 Perpetuum Essence – Árgyelán Dorina. Minden jog fenntartva.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── NAVBAR SCROLL ───────────────────────────────────── */
+  var nav = document.getElementById('peNav');
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('is-scrolled', window.scrollY > 80);
+  }, { passive: true });
+
+  /* ── DARK MODE ───────────────────────────────────────── */
+  var html = document.documentElement;
+  var themeBtn = document.getElementById('themeToggle');
+  var savedTheme = localStorage.getItem('pe-theme') || 'light';
+  html.setAttribute('data-theme', savedTheme);
+  themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+  themeBtn.addEventListener('click', function () {
+    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+    localStorage.setItem('pe-theme', next);
+  });
+
+  /* ── HAMBURGER ───────────────────────────────────────── */
+  var burger   = document.getElementById('burgerBtn');
+  var overlay  = document.getElementById('mobOverlay');
+  var closeBtn = document.getElementById('overlayClose');
+  function openMenu()  { overlay.classList.add('open'); burger.setAttribute('aria-expanded','true');  document.body.style.overflow = 'hidden'; }
+  function closeMenu() { overlay.classList.remove('open'); burger.setAttribute('aria-expanded','false'); document.body.style.overflow = ''; }
+  burger.addEventListener('click', function(e) {
+  e.stopPropagation();
+  overlay.classList.contains('open') ? closeMenu() : openMenu();
+});
+closeBtn.addEventListener('click', closeMenu);
+document.addEventListener('click', function(e) {
+  if (overlay.classList.contains('open') && !overlay.contains(e.target) && e.target !== burger) {
+    closeMenu();
+  }
+});
+  overlay.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+
+  /* ── MÓDSZER ACCORDION ────────────────────────────────── */
+  document.querySelectorAll('.acc-trigger').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var item   = btn.closest('.acc-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.acc-item').forEach(function (i) {
+        i.classList.remove('open');
+        i.querySelector('.acc-trigger').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* ── GYIK ACCORDION ──────────────────────────────────── */
+  document.querySelectorAll('.gyik-trigger').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var item   = btn.closest('.gyik-item');
+      var isOpen = item.classList.contains('open');
+      item.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+
+  /* ── FADE-IN (IntersectionObserver) ──────────────────── */
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fi').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.fi').forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  /* ── STICKY CTA BAR ──────────────────────────────────── */
+  var bar         = document.getElementById('stickyBar');
+  var heroEl      = document.getElementById('hero');
+  var footerEl    = document.getElementById('footer');
+  var heroGone    = false;
+  var footerVis   = false;
+  function updateBar() { bar.classList.toggle('visible', heroGone && !footerVis); }
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      heroGone = !entries[0].isIntersecting;
+      updateBar();
+    }, { threshold: 0.3 }).observe(heroEl);
+
+    new IntersectionObserver(function (entries) {
+      footerVis = entries[0].isIntersecting;
+      updateBar();
+    }, { threshold: 0.05 }).observe(footerEl);
+  }
+
+  /* ── SMOOTH SCROLL ───────────────────────────────────── */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      var target = document.getElementById(id);
+      if (target) {
+        e.preventDefault();
+        var offset = target.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: offset, behavior: 'smooth' });
+      }
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>
