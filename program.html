@@ -1,0 +1,972 @@
+
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Perpetuum Essence Program | Tartalom automatizálás – Árgyelán Dorina</title>
+  <meta name="description" content="Megírtad. Most automatizáld. A Perpetuum Essence Program megtanítja, hogyan lesz egy forrástartalomból blog, hírlevél, social és Canva-kép — Make.com és Claude segítségével.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Poppins:wght@400;500;600&family=Raleway:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+  <style>
+    :root {
+      --green:   #00594D;
+      --blue:    #073950;
+      --lblue:   #86C2CC;
+      --yellow:  #FFDE59;
+      --paper:   #EFF3EF;
+      --white:   #FFFFFF;
+      --muted:   rgba(7,57,80,.55);
+      --font-display: "Yeseva One", Georgia, serif;
+      --font-body:    "Poppins", system-ui, sans-serif;
+      --font-accent:  "Raleway", Georgia, serif;
+      --ease-soft: cubic-bezier(.22,.61,.36,1);
+      --nav-h: 72px;
+      --max-w: 1280px;
+      --px: 28px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--paper);
+      font-family: var(--font-body); color: var(--blue);
+      line-height: 1.7; -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--px); }
+
+    .label {
+      display: flex; align-items: center; gap: .6rem;
+      font-size: 11px; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 1.25rem;
+    }
+    .label--center { justify-content: center; }
+    .label--green { color: var(--green); }
+    .label::before, .label::after {
+      content: ''; flex: 0 0 28px; height: 1px; background: currentColor; opacity: .5;
+    }
+
+    .fi { opacity: 0; transform: translateY(24px); transition: opacity .65s var(--ease-soft), transform .65s var(--ease-soft); }
+    .fi.visible { opacity: 1; transform: none; }
+
+    /* DARK MODE */
+    [data-theme="dark"] { --paper: #0d1e28; --white: #142330; color-scheme: dark; }
+    [data-theme="dark"] body { color: #bdd6e4; }
+    [data-theme="dark"] h1,[data-theme="dark"] h2,[data-theme="dark"] h3 { color: #bdd6e4; }
+    [data-theme="dark"] .pe-nav__wordmark-main { color: #bdd6e4; }
+    [data-theme="dark"] .pe-nav__wordmark-main em { color: rgba(189,214,228,.55); }
+    [data-theme="dark"] .pe-nav__subname { color: #bdd6e4; }
+    [data-theme="dark"] .pe-nav.is-scrolled { background: rgba(13,30,40,.88); border-bottom-color: rgba(189,214,228,.1); }
+    [data-theme="dark"] .pe-nav__icon { color: rgba(189,214,228,.7); }
+    [data-theme="dark"] .pe-nav__theme { color: #bdd6e4; border-color: rgba(189,214,228,.2); }
+    [data-theme="dark"] .pe-nav__wordmark-main { color: #bdd6e4; }
+    [data-theme="dark"] .pe-nav__wordmark-main em { color: rgba(189,214,228,.55); }
+    [data-theme="dark"] .pe-nav__subname { color: rgba(189,214,228,.7); }
+    [data-theme="dark"] .pe-nav__burger svg { stroke: #bdd6e4; }
+    [data-theme="dark"] .mob-overlay { background: #1a2f3f; border-color: rgba(189,214,228,.15); }
+    [data-theme="dark"] .mob-overlay__links a { color: #bdd6e4; }
+    [data-theme="dark"] .mob-overlay__links a[aria-current="page"] { color: var(--yellow); }
+    [data-theme="dark"] .pain-card { background: #1a2f3f; }
+    [data-theme="dark"] .module-item { background: #1a2f3f; border-color: rgba(189,214,228,.1); }
+    [data-theme="dark"] .module-item__header { color: #bdd6e4; }
+    [data-theme="dark"] .what-card { background: #1a2f3f; }
+    [data-theme="dark"] .price-box { background: #1a2f3f; }
+    [data-theme="dark"] .workshop-card { background: #1a2f3f; }
+    [data-theme="dark"] .footer__brand p,[data-theme="dark"] .footer__links a { color: rgba(189,214,228,.5); }
+
+    /* NAVBAR */
+    .pe-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: var(--nav-h); background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: height .28s var(--ease-soft), background .28s var(--ease-soft),
+                  backdrop-filter .28s var(--ease-soft), border-color .28s var(--ease-soft);
+    }
+    .pe-nav.is-scrolled {
+      height: 60px; background: rgba(239,243,239,.85);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom-color: rgba(7,57,80,.1);
+    }
+    .pe-nav__inner {
+      max-width: var(--max-w); height: 100%; margin: 0 auto; padding: 0 var(--px);
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    /* A hero sötét háttere miatt a brand szöveg mindig fehér legyen */
+    .pe-nav__wordmark-main { font-family: var(--font-display); font-size: 18px; line-height: 1; color: var(--white); letter-spacing: -.005em; }
+    .pe-nav__wordmark-main em { font-family: var(--font-accent); font-style: italic; font-weight: 400; color: rgba(255,255,255,.55); }
+    .pe-nav__subname { font-family: var(--font-accent); font-style: italic; font-size: 11px; line-height: 1; color: var(--white); opacity: .7; }
+    /* Görgetés után (is-scrolled) sötétkékre vált vissza */
+    .pe-nav.is-scrolled .pe-nav__wordmark-main { color: var(--blue); }
+    .pe-nav.is-scrolled .pe-nav__wordmark-main em { color: var(--muted); }
+    .pe-nav.is-scrolled .pe-nav__subname { color: var(--blue); }
+    .pe-nav.is-scrolled .pe-nav__theme { border-color: rgba(7,57,80,.18); color: var(--blue); }
+    .pe-nav.is-scrolled .pe-nav__burger svg { stroke: var(--blue); }
+    .pe-nav__right { display: flex; align-items: center; gap: 10px; }
+    .pe-nav__theme {
+      background: none; border: 1px solid rgba(255,255,255,.3); border-radius: 50%;
+      width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 16px; color: var(--white);
+      transition: background .2s; flex-shrink: 0;
+    }
+    .pe-nav__cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--blue);
+      background: var(--yellow); border: 0; border-radius: 999px;
+      padding: 9px 18px; text-decoration: none; white-space: nowrap;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
+      transition: background .25s, transform .1s;
+    }
+    .pe-nav__cta:hover { background: #f5d143; }
+    .pe-nav__icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); text-decoration: none;
+      transition: color .2s, background .2s; flex-shrink: 0;
+    }
+    .pe-nav__icon:hover { color: var(--blue); background: rgba(7,57,80,.06); }
+    .pe-nav__icon svg { display: block; }
+    .pe-nav__burger {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      background: none; border: none; cursor: pointer;
+      transition: background .2s; flex-shrink: 0; padding: 0;
+    }
+    .pe-nav__burger svg { stroke: var(--white); }
+    .pe-nav__burger:hover { background: rgba(255,255,255,.1); }
+    @media (max-width: 640px) { .pe-nav__cta { display: none; } }
+
+    /* OVERLAY */
+    .mob-overlay {
+      position: fixed; top: 68px; right: 24px; z-index: 300;
+      background: var(--white); border: 1px solid rgba(7,57,80,.1);
+      border-radius: 16px; padding: 1.5rem; min-width: 240px;
+      box-shadow: 0 8px 32px rgba(7,57,80,.15);
+      opacity: 0; pointer-events: none; transform: translateY(-8px);
+      transition: opacity .25s var(--ease-soft), transform .25s var(--ease-soft);
+    }
+    .mob-overlay.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+    .mob-overlay__close { display: none; }
+    .mob-overlay__links {
+      display: flex; flex-direction: column; gap: .75rem;
+      list-style: none; padding: 0; margin: 0 0 1rem;
+    }
+    .mob-overlay__links a { font-size: 1rem; font-weight: 500; color: var(--blue); transition: color .2s; }
+    .mob-overlay__links a:hover { color: var(--green); }
+    .mob-overlay__links a[aria-current="page"] { color: var(--green); font-weight: 600; }
+    .mob-overlay__cta {
+      display: block; text-align: center;
+      background: var(--yellow); color: var(--blue);
+      padding: 10px 20px; border-radius: 999px; font-size: .9rem; font-weight: 600;
+    }
+
+    /* ═══════ HERO ═══════ */
+    .hero {
+      padding-top: calc(var(--nav-h) + 5rem);
+      padding-bottom: 5rem;
+      background: var(--blue);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero__watermark {
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 18vw, 18rem);
+      color: rgba(255,255,255,.04);
+      pointer-events: none; white-space: nowrap; line-height: 1;
+    }
+    .hero__label {
+      font-size: 11px; font-weight: 600; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--lblue);
+      margin-bottom: 1.5rem; display: block;
+    }
+    .hero__h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.05; color: var(--white);
+      margin: 0 0 1rem; max-width: 14ch; margin-left: auto; margin-right: auto;
+    }
+    .hero__h1 em {
+      font-family: var(--font-accent); font-style: italic;
+      color: var(--yellow);
+    }
+    .hero__sub {
+      font-size: 17px; color: rgba(255,255,255,.65);
+      max-width: 52ch; margin: 0 auto 2.5rem; line-height: 1.75;
+    }
+    .hero__ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--yellow); color: var(--blue);
+      font-weight: 600; font-size: 15px;
+      padding: 14px 30px; border-radius: 999px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
+      transition: background .2s, transform .1s;
+    }
+    .btn-primary:hover { background: #f5d143; }
+    .btn-primary:active { transform: scale(.98); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1.5px solid rgba(255,255,255,.3); color: rgba(255,255,255,.8);
+      font-weight: 500; font-size: 15px;
+      padding: 13px 28px; border-radius: 999px;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,.7); color: #fff; }
+    .hero__badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 2rem; font-size: 13px; color: rgba(255,255,255,.45);
+    }
+    .hero__badge::before {
+      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--lblue); flex-shrink: 0;
+    }
+
+    /* ═══════ SCROLLING TICKER ═══════ */
+    .ticker {
+      background: var(--green);
+      padding: .75rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker__inner {
+      display: inline-flex; gap: 3rem;
+      animation: ticker 25s linear infinite;
+    }
+    .ticker__item {
+      font-size: 13px; font-weight: 500;
+      color: rgba(255,255,255,.85); flex-shrink: 0;
+    }
+    .ticker__sep { color: var(--lblue); opacity: .6; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ═══════ PAIN ═══════ */
+    .pain { padding: 6rem 0; background: var(--paper); }
+    .pain__grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem; margin-top: 2.5rem;
+    }
+    .pain-card {
+      background: var(--white); border-radius: 14px;
+      padding: 1.5rem; border: 1.5px solid rgba(7,57,80,.08);
+      border-left: 3px solid var(--lblue);
+    }
+    .pain-card__title { font-weight: 600; font-size: 15px; margin: 0 0 .5rem; }
+    .pain-card__body { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0; }
+
+    /* ═══════ SOLUTION ═══════ */
+    .solution { padding: 6rem 0; background: var(--white); }
+    .solution__inner { max-width: 780px; margin: 0 auto; padding: 0 var(--px); }
+    .solution__lead {
+      font-family: var(--font-accent); font-style: italic;
+      font-size: clamp(1.2rem, 2vw, 1.4rem); line-height: 1.6;
+      color: var(--green); border-left: 3px solid var(--lblue);
+      padding-left: 1.5rem; margin: 0 0 2rem;
+    }
+    .solution p { font-size: 15.5px; line-height: 1.85; margin: 0 0 1.2rem; }
+    .solution p:last-child { margin: 0; }
+
+    /* ═══════ MODULES ═══════ */
+    .modules { padding: 6rem 0; background: var(--paper); }
+    .modules__list { max-width: 780px; margin: 2rem auto 0; padding: 0 var(--px); display: flex; flex-direction: column; gap: .75rem; }
+    .module-item {
+      background: var(--white); border-radius: 14px;
+      border: 1.5px solid rgba(7,57,80,.08);
+      overflow: hidden;
+    }
+    .module-item__header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 1.5rem; cursor: pointer;
+      font-weight: 600; font-size: 15px; color: var(--blue);
+      gap: 1rem;
+    }
+    .module-item__header:hover { background: rgba(7,57,80,.02); }
+    .module-item__num {
+      font-family: var(--font-display); font-size: 1.1rem;
+      color: var(--lblue); flex-shrink: 0; width: 2rem;
+    }
+    .module-item__title { flex: 1; }
+    .module-item__title small {
+      display: block; font-weight: 400; font-size: 12px;
+      color: var(--muted); margin-top: 2px; font-style: italic;
+    }
+    .module-item__chevron {
+      font-size: 16px; color: var(--muted);
+      transition: transform .25s; flex-shrink: 0;
+    }
+    .module-item.open .module-item__chevron { transform: rotate(180deg); }
+    .module-item__body {
+      max-height: 0; overflow: hidden;
+      transition: max-height .35s var(--ease-soft);
+    }
+    .module-item.open .module-item__body { max-height: 400px; }
+    .module-item__content {
+      padding: 0 1.5rem 1.5rem 3.5rem;
+      font-size: 14px; color: var(--muted); line-height: 1.7;
+    }
+    .module-item__deliverable {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: .75rem; font-size: 12px; font-weight: 600;
+      color: var(--green); background: #D6EDE9;
+      padding: 4px 10px; border-radius: 20px;
+    }
+
+    /* ═══════ WHAT YOU GET ═══════ */
+    .what { padding: 6rem 0; background: var(--white); }
+    .what__grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem; margin-top: 2.5rem;
+    }
+    .what-card {
+      background: var(--paper); border-radius: 14px;
+      padding: 1.75rem 1.5rem; text-align: center;
+      border: 1.5px solid rgba(7,57,80,.06);
+    }
+    .what-card__num {
+      font-family: var(--font-display); font-size: 2.5rem;
+      color: var(--green); line-height: 1; margin-bottom: .4rem;
+    }
+    .what-card__label { font-size: 13px; color: var(--muted); line-height: 1.4; }
+    .what__strip {
+      margin-top: 1.5rem; padding: 1rem 1.5rem;
+      background: #D9EEF1; border-radius: 10px;
+      font-size: 14px; color: var(--blue); text-align: center;
+      max-width: 780px; margin-left: auto; margin-right: auto;
+    }
+
+    /* ═══════ FOR WHO ═══════ */
+    .forwho { padding: 6rem 0; background: var(--paper); }
+    .forwho__grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; margin-top: 2.5rem; max-width: 900px; margin-left: auto; margin-right: auto;
+    }
+    .forwho__col {
+      background: var(--white); border-radius: 16px;
+      padding: 2rem; border: 1.5px solid rgba(7,57,80,.08);
+    }
+    .forwho__col--yes { border-top: 3px solid var(--green); }
+    .forwho__col--no { border-top: 3px solid #e57373; }
+    .forwho__col h3 {
+      font-size: 15px; font-weight: 700; margin: 0 0 1.25rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .forwho__col--yes h3 { color: var(--green); }
+    .forwho__col--no h3 { color: #c62828; }
+    .forwho__list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .75rem; }
+    .forwho__list li {
+      font-size: 14px; color: var(--blue); line-height: 1.5;
+      padding-bottom: .75rem; border-bottom: 1px solid rgba(7,57,80,.06);
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .forwho__list li:last-child { border-bottom: none; padding-bottom: 0; }
+    .forwho__list li::before { flex-shrink: 0; margin-top: 2px; font-size: 14px; }
+    .forwho__col--yes .forwho__list li::before { content: '✓'; color: var(--green); font-weight: 700; }
+    .forwho__col--no .forwho__list li::before { content: '✕'; color: #e57373; font-weight: 700; }
+
+    /* ═══════ PRICING ═══════ */
+    .pricing { padding: 6rem 0; background: var(--blue); text-align: center; }
+    .pricing h2 {
+      font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--white); margin: 0 0 .5rem;
+    }
+    .pricing__sub { font-size: 15px; color: rgba(255,255,255,.55); margin: 0 0 3rem; }
+    .price-box {
+      background: var(--white); border-radius: 20px;
+      padding: 2.5rem 2rem; max-width: 480px;
+      margin: 0 auto 2rem; text-align: left;
+      box-shadow: 0 20px 60px rgba(0,0,0,.2);
+    }
+    .price-box__tag {
+      font-size: 10px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--green);
+      background: #D6EDE9; padding: 4px 12px; border-radius: 20px;
+      display: inline-block; margin-bottom: 1.5rem;
+    }
+    .price-box__price {
+      font-family: var(--font-display); font-size: 3.5rem;
+      color: var(--blue); line-height: 1; margin-bottom: .25rem;
+    }
+    .price-box__note { font-size: 13px; color: var(--muted); margin-bottom: 2rem; }
+    .price-box__list { list-style: none; padding: 0; margin: 0 0 2rem; display: flex; flex-direction: column; gap: .75rem; }
+    .price-box__list li {
+      font-size: 14px; color: var(--blue); display: flex; gap: 10px; align-items: flex-start;
+      padding-bottom: .75rem; border-bottom: 1px solid rgba(7,57,80,.06);
+    }
+    .price-box__list li:last-child { border-bottom: none; padding-bottom: 0; }
+    .price-box__list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .price-box__cta {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 15px; border-radius: 999px;
+      background: var(--yellow); color: var(--blue);
+      font-weight: 700; font-size: 16px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
+      transition: background .2s, transform .1s; border: none; cursor: pointer;
+    }
+    .price-box__cta:hover { background: #f5d143; }
+    .price-box__cta:active { transform: scale(.98); }
+    .pricing__note { font-size: 13px; color: rgba(255,255,255,.4); margin-top: 1rem; }
+
+    /* ═══════ WORKSHOPS ═══════ */
+    .workshops { padding: 5rem 0; background: var(--paper); }
+    .workshops__grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.25rem; margin-top: 2rem; max-width: 780px;
+      margin-left: auto; margin-right: auto; padding: 0 var(--px);
+    }
+    .workshop-card {
+      background: var(--white); border-radius: 16px;
+      padding: 1.75rem; border: 1.5px solid rgba(7,57,80,.08);
+      position: relative; overflow: hidden;
+    }
+    .workshop-card__icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 1rem;
+      background: #D9EEF1; color: #3A8A97;
+    }
+    .workshop-card__title {
+      font-family: var(--font-display); font-size: 1rem;
+      color: var(--blue); margin: 0 0 .5rem; line-height: 1.3;
+    }
+    .workshop-card__sub { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0 0 1.25rem; }
+    .workshop-card__price {
+      font-family: var(--font-display); font-size: 1.4rem;
+      color: var(--green); margin-bottom: 1rem;
+    }
+    .workshop-card__cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--green);
+      transition: gap .15s;
+    }
+    .workshop-card__cta:hover { gap: 10px; }
+    .workshop-card__corner {
+      position: absolute; right: 12px; bottom: 8px;
+      font-size: 52px; opacity: .05; pointer-events: none;
+    }
+
+    /* ═══════ FOOTER ═══════ */
+    .footer { background: var(--blue); color: rgba(255,255,255,.7); padding: 4rem 0 0; }
+    .footer__inner { display: grid; grid-template-columns: 2fr 1fr 1.2fr; gap: 3rem; padding-bottom: 3rem; }
+    .navbar__logo-fallback {
+      font-family: var(--font-display); font-size: 1.1rem; color: var(--white);
+      display: flex; flex-direction: column; gap: 3px; margin-bottom: 1rem;
+    }
+    .navbar__logo-fallback span { font-family: var(--font-accent); font-style: italic; font-size: .85rem; color: rgba(255,255,255,.45); }
+    .footer__brand p { font-size: 13px; line-height: 1.65; color: rgba(255,255,255,.45); max-width: 34ch; }
+    .footer__heading { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.3); margin: 0 0 1rem; }
+    .footer__links { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: .55rem 1.5rem; }
+    .footer__links--single { grid-template-columns: 1fr; }
+    .footer__links a { font-size: 13px; color: rgba(255,255,255,.6); transition: color .2s; }
+    .footer__links a:hover { color: var(--white); }
+    .footer__social { display: flex; gap: .65rem; margin-top: .5rem; }
+    .footer__social-link {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.15);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.55); transition: border-color .2s, color .2s;
+    }
+    .footer__social-link:hover { border-color: rgba(255,255,255,.7); color: var(--white); }
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,.08); padding: 1.5rem 0;
+      font-size: 12px; color: rgba(255,255,255,.28);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .forwho__grid { grid-template-columns: 1fr; }
+      .workshops__grid { grid-template-columns: 1fr; }
+      .footer__inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      :root { --px: 18px; }
+      .footer__inner { grid-template-columns: 1fr; }
+      .footer__bottom { flex-direction: column; }
+      .what__grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="pe-nav" id="peNav">
+  <div class="pe-nav__inner">
+    <a class="pe-nav__brand" href="index.html" aria-label="Perpetuum Essence – Főoldal">
+      <div class="pe-nav__wordmark">
+        <span class="pe-nav__wordmark-main">Perpetuum <em>Essence</em></span>
+        <span class="pe-nav__subname">Árgyelán Dorina</span>
+      </div>
+    </a>
+    <div class="pe-nav__right">
+      <button class="pe-nav__theme" id="themeToggle" aria-label="Téma váltás">🌙</button>
+      <a class="pe-nav__cta" href="#arlista">Belépek a programba →</a>
+      <button class="pe-nav__burger" id="burgerBtn" aria-label="Menü megnyitása" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mob-overlay" id="mobOverlay" role="dialog" aria-modal="true" aria-label="Navigáció">
+  <button class="mob-overlay__close" id="overlayClose" aria-label="Bezárás">✕</button>
+  <ul class="mob-overlay__links">
+    <li><a href="index.html">Főoldal</a></li>
+    <li><a href="program.html" aria-current="page">Perpetuum Essence Program</a></li>
+    <li><a href="szolgaltatasok.html">Szolgáltatások</a></li>
+    <li><a href="muhely.html">Műhely</a></li>
+    <li><a href="rolam.html">Rólam</a></li>
+    <li><a href="kapcsolat.html">Kapcsolat</a></li>
+  </ul>
+  <a href="#arlista" class="mob-overlay__cta">Belépek a programba</a>
+</div>
+
+<main>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <span class="hero__watermark" aria-hidden="true">Perpetuum</span>
+  <div class="container">
+    <span class="hero__label fi">Online program</span>
+    <h1 class="hero__h1 fi" style="transition-delay:.08s">
+      Megírtad.<br><em>Most automatizáld.</em>
+    </h1>
+    <p class="hero__sub fi" style="transition-delay:.14s">
+      A Perpetuum Essence Program megtanítja, hogyan lesz egy forrástartalomból blog, hírlevél, social és Canva-kép — Make.com és Claude segítségével, automatikusan.
+    </p>
+    <div class="hero__ctas fi" style="transition-delay:.2s">
+      <a href="#arlista" class="btn-primary">Belépek a programba <i class="ti ti-arrow-right"></i></a>
+      <a href="#modulok" class="btn-outline">Megnézem a tananyagot</a>
+    </div>
+    <p class="hero__badge fi" style="transition-delay:.26s">159.000 Ft egyszeri díj — nincs előfizetés, nincs megújulás</p>
+  </div>
+</section>
+
+<!-- ═══════ TICKER ═══════ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__inner">
+    <span class="ticker__item">Tartalom automatizálás</span>
+    <span class="ticker__sep">✦</span>
+    <span class="ticker__item">Make.com workflow</span>
+    <span class="ticker__sep">✦</span>
+    <span class="ticker__item">Claude AI</span>
+    <span class="ticker__sep">✦</span>
+    <span class="ticker__item">Fenntartható marketing</span>
+    <span class="ticker__sep">✦</span>
+    <span class="ticker__item">SEO tartalom rendszer</span>
+    <span class="ticker__sep">✦</span>
+    <span class="ticker__item">Egyszer írod, mindenhol megjelenik</span>
+    <span class="ticker__sep">✦</span>
+    <span class="ticker__item">Tartalom újrahasznosítás</span>
+    <span class="ticker__sep">✦</span>
+    <span class="ticker__item">Tartalom automatizálás</span>
+    <span class="ticker__sep">✦</span>
+    <span class="ticker__item">Make.com workflow</span>
+    <span class="ticker__sep">✦</span>
+    <span class="ticker__item">Claude AI</span>
+    <span class="ticker__sep">✦</span>
+    <span class="ticker__item">Fenntartható marketing</span>
+    <span class="ticker__sep">✦</span>
+    <span class="ticker__item">SEO tartalom rendszer</span>
+    <span class="ticker__sep">✦</span>
+    <span class="ticker__item">Egyszer írod, mindenhol megjelenik</span>
+    <span class="ticker__sep">✦</span>
+    <span class="ticker__item">Tartalom újrahasznosítás</span>
+    <span class="ticker__sep">✦</span>
+  </div>
+</div>
+
+<!-- ═══════ PAIN ═══════ -->
+<section class="pain">
+  <div class="container">
+    <div class="label fi">A PROBLÉMA</div>
+    <h2 class="fi" style="font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.6rem);margin:0;transition-delay:.06s">Ismered ezt?</h2>
+    <div class="pain__grid fi" style="transition-delay:.12s">
+      <div class="pain-card">
+        <p class="pain-card__title">Minden héten nulláról kezded</p>
+        <p class="pain-card__body">Van tudásod, van mondanivalód — de minden tartalomnál újra szembenézel a fehér lappal. Nincs rendszer, ami megtartaná a lendületet.</p>
+      </div>
+      <div class="pain-card">
+        <p class="pain-card__title">Egy tartalom, egy platform</p>
+        <p class="pain-card__body">Megírod a blogcikket, ott marad. Nem lesz belőle hírlevél, LinkedIn poszt, Instagram carousel, mert nincs idő mindent kézzel átírni.</p>
+      </div>
+      <div class="pain-card">
+        <p class="pain-card__title">Az automatizálás ijesztőnek tűnik</p>
+        <p class="pain-card__body">Hallottál a Make.com-ról, tudod, hogy kellene — de nem tudod, hol kezdd, és fél, hogy túl technikai lesz ahhoz, hogy tényleg használd.</p>
+      </div>
+      <div class="pain-card">
+        <p class="pain-card__title">Kiégsz a tartalomgyártásban</p>
+        <p class="pain-card__body">Naponta posztolni, minden csatornán jelen lenni, mérni, optimalizálni — miközben a valódi munkád is megvár. Valami nem fenntartható ebben.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SOLUTION ═══════ -->
+<section class="solution">
+  <div class="solution__inner">
+    <div class="label fi">A MEGOLDÁS</div>
+    <p class="solution__lead fi" style="transition-delay:.08s">
+      Nem több tartalmat kell gyártanod. Hanem olyan rendszert kell felépítened, ami a meglévő anyagaidból dolgozik — te helyetted.
+    </p>
+    <div class="fi" style="transition-delay:.14s">
+      <p>A Perpetuum Essence Program nem arról szól, hogy naponta többet posztolj. Arról szól, hogy amit már megírtál vagy elmondtál, az minden platformon megjelenjen — automatikusan, a te hangodban.</p>
+      <p>7 modulon keresztül felépíted a saját tartalom-rendszeredet: a témaötletektől a Claude-alapú hangstíluson át a Make.com automatizálásig. A végén kapsz egy "gépkönyvet", amivel heti 1 óra alatt kezelheted a teljes havi jelenlétedet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ MODULES ═══════ -->
+<section class="modules" id="modulok">
+  <div class="container">
+    <div class="label label--center fi">TANANYAG</div>
+    <h2 class="fi" style="font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.6rem);margin:0 0 .5rem;text-align:center;transition-delay:.06s">7 modul, működő rendszer a végén.</h2>
+    <p class="fi" style="text-align:center;color:var(--muted);font-size:15px;margin:0;transition-delay:.1s">Minden modul konkrét deliverable-lel zárul — nem tanulsz, hanem építesz.</p>
+  </div>
+  <div class="modules__list fi" style="transition-delay:.14s">
+
+    <div class="module-item" onclick="toggleModule(this)">
+      <div class="module-item__header">
+        <span class="module-item__num">01</span>
+        <span class="module-item__title">Honnan legyen mindig miről írni?
+          <small>Soha többé fehér lap szindróma</small>
+        </span>
+        <i class="ti ti-chevron-down module-item__chevron"></i>
+      </div>
+      <div class="module-item__body">
+        <div class="module-item__content">
+          Tartalompillérek, kulcsszókutatás, ötletbank felépítése. Megtanulod, hogyan építs fel egy olyan rendszert, amiből mindig tudod, mit írj — 3 hónapra előre.
+          <br><span class="module-item__deliverable"><i class="ti ti-star"></i> Deliverable: 3 hónapra elegendő tématerv</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="module-item" onclick="toggleModule(this)">
+      <div class="module-item__header">
+        <span class="module-item__num">02</span>
+        <span class="module-item__title">A te hangod, digitálisan
+          <small>Claude projekt felépítése</small>
+        </span>
+        <i class="ti ti-chevron-down module-item__chevron"></i>
+      </div>
+      <div class="module-item__body">
+        <div class="module-item__content">
+          Stílus-DNS dokumentum: a te saját mondatszerkezeted, kedvelt fordulataid, kerülendő kifejezéseid. 5 sablon-prompt blogcikkhez, hírlevélhez, LinkedIn-hez, Insta captionhoz, YouTube leíráshoz. Önellenőrző "robotizű-szűrő" — minden output átmegy rajta.
+          <br><span class="module-item__deliverable"><i class="ti ti-star"></i> Deliverable: működő Claude projekt</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="module-item" onclick="toggleModule(this)">
+      <div class="module-item__header">
+        <span class="module-item__num">03</span>
+        <span class="module-item__title">Egyszer írod, mindenhol megjelenik
+          <small>Az újrahasznosítás logikája</small>
+        </span>
+        <i class="ti ti-chevron-down module-item__chevron"></i>
+      </div>
+      <div class="module-item__body">
+        <div class="module-item__content">
+          Mi megy hova, milyen formátumban — a teljes platform-térkép. Megtanulod, melyik tartalom alkalmas mire, és hogyan alakítsd át minimális munkával.
+          <br><span class="module-item__deliverable"><i class="ti ti-star"></i> Deliverable: saját platform-térkép</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="module-item" onclick="toggleModule(this)">
+      <div class="module-item__header">
+        <span class="module-item__num">04</span>
+        <span class="module-item__title">Az automatizálás alapjai
+          <small>Make.com első lépések</small>
+        </span>
+        <i class="ti ti-chevron-down module-item__chevron"></i>
+      </div>
+      <div class="module-item__body">
+        <div class="module-item__content">
+          Hogyan gondolkodj folyamatokban — az első saját scenario beállítása. Nem játékpélda, hanem a te vállalkozásodra szabott, azonnal használható megoldás.
+          <br><span class="module-item__deliverable"><i class="ti ti-star"></i> Deliverable: első működő Make scenario</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="module-item" onclick="toggleModule(this)">
+      <div class="module-item__header">
+        <span class="module-item__num">05</span>
+        <span class="module-item__title">Blog → hírlevél + social automatán
+          <small>A teljes pipeline beépítése</small>
+        </span>
+        <i class="ti ti-chevron-down module-item__chevron"></i>
+      </div>
+      <div class="module-item__body">
+        <div class="module-item__content">
+          Összekötjük a rendszereidet, hogy a tartalom magától áramoljon a platformok között. Egy blogcikk automatikusan hírlevelet, LinkedIn posztot és Instagram captiont generál.
+          <br><span class="module-item__deliverable"><i class="ti ti-star"></i> Deliverable: működő tartalom-automatizálás</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="module-item" onclick="toggleModule(this)">
+      <div class="module-item__header">
+        <span class="module-item__num">06</span>
+        <span class="module-item__title">Canva + vizualizáció automatán
+          <small>Brandkit, sablonok, automatikus képgenerálás</small>
+        </span>
+        <i class="ti ti-chevron-down module-item__chevron"></i>
+      </div>
+      <div class="module-item__body">
+        <div class="module-item__content">
+          Canva és Make.com összekötve — a kreatívok is maguktól készülnek. A szövegtől a képig egy automatizált folyamatban, a te brand-stílusodban.
+          <br><span class="module-item__deliverable"><i class="ti ti-star"></i> Deliverable: Canva + Make összekötve</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="module-item" onclick="toggleModule(this)">
+      <div class="module-item__header">
+        <span class="module-item__num">07</span>
+        <span class="module-item__title">A fenntartható heti rutin
+          <small>Heti 1 óra, és kész a hónap</small>
+        </span>
+        <i class="ti ti-chevron-down module-item__chevron"></i>
+      </div>
+      <div class="module-item__body">
+        <div class="module-item__content">
+          Ütemezés, tartalomtár, mérés — kapsz egy "gépkönyvet", amivel menedzselheted a teljes havi jelenlétedet. Nem kell minden héten kitalálni semmit.
+          <br><span class="module-item__deliverable"><i class="ti ti-star"></i> Deliverable: üzemeltetési SOP dokumentum</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════ WHAT YOU GET ═══════ -->
+<section class="what">
+  <div class="container">
+    <div class="label label--center fi">AMIT KAPSZ</div>
+    <h2 class="fi" style="font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.6rem);margin:0;text-align:center;transition-delay:.06s">Minden, ami kell a rendszerhez.</h2>
+    <div class="what__grid fi" style="transition-delay:.12s">
+      <div class="what-card">
+        <div class="what-card__num">7</div>
+        <div class="what-card__label">modul, lépésről lépésre felépítve</div>
+      </div>
+      <div class="what-card">
+        <div class="what-card__num">7</div>
+        <div class="what-card__label">konkrét deliverable, amit a kurzus végére elkészítesz</div>
+      </div>
+      <div class="what-card">
+        <div class="what-card__num">∞</div>
+        <div class="what-card__label">örökös hozzáférés a felvételekhez és anyagokhoz</div>
+      </div>
+      <div class="what-card">
+        <div class="what-card__num">1×</div>
+        <div class="what-card__label">egyszeri díj, nincs előfizetés, nincs megújulás</div>
+      </div>
+    </div>
+    <div class="what__strip fi" style="transition-delay:.16s">
+      7 modul · 7 deliverable · Örökös hozzáférés · Make.com blueprintek · Claude promptok · Egyszeri díj
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOR WHO ═══════ -->
+<section class="forwho">
+  <div class="container">
+    <div class="label label--center fi">NEKED SZÓL?</div>
+    <h2 class="fi" style="font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.6rem);margin:0;text-align:center;transition-delay:.06s">Ez a program neked való, ha...</h2>
+    <div class="forwho__grid fi" style="transition-delay:.12s">
+      <div class="forwho__col forwho__col--yes">
+        <h3><i class="ti ti-circle-check"></i> Neked készült, ha</h3>
+        <ul class="forwho__list">
+          <li>Szakértő, coach, tréner vagy szolgáltató vállalkozó vagy — egyedül vagy kis csapattal</li>
+          <li>Tudod, mit akarsz mondani, de nem tudod, hogyan legyen belőle rendszer</li>
+          <li>Belefáradtál az állandó tartalomgyártásba, de ügyfeleket szeretnél social médiából</li>
+          <li>Érdekel az automatizálás, de fél, hogy túl technikai lesz</li>
+          <li>Szeretnél egyszerre több platformon jelen lenni anélkül, hogy megdupláznád a munkát</li>
+        </ul>
+      </div>
+      <div class="forwho__col forwho__col--no">
+        <h3><i class="ti ti-circle-x"></i> Nem neked való, ha</h3>
+        <ul class="forwho__list">
+          <li>Még nincs vállalkozásod vagy célközönséged, akinek tartalmat készítenél</li>
+          <li>Profi szinten használod már a Make.com-ot és Claude-ot</li>
+          <li>Varázsgombot keresel, ami egy kattintásra megold mindent</li>
+          <li>Nem vagy hajlandó 2-3 hetet szánni arra, hogy a rendszert valóban felépítsd</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PRICING ═══════ -->
+<section class="pricing" id="arlista">
+  <div class="container">
+    <div class="label label--center fi" style="color:rgba(255,255,255,.4);">EGY ÁR. MINDEN BENNE.</div>
+    <h2 class="fi" style="transition-delay:.06s">Nem előfizetés.<br>Nincs megújulás.</h2>
+    <p class="pricing__sub fi" style="transition-delay:.1s">Egyszeri befektetés, örökös hozzáférés.</p>
+    <div class="price-box fi" style="transition-delay:.14s">
+      <span class="price-box__tag">Perpetuum Essence Program</span>
+      <div class="price-box__price">159.000 Ft</div>
+      <p class="price-box__note">egyszeri díj — nincs előfizetés, nincs csoportdíj</p>
+      <ul class="price-box__list">
+        <li>7 modul, lépésről lépésre felépítve</li>
+        <li>7 konkrét deliverable a rendszeredhez</li>
+        <li>Make.com blueprintek — azonnal importálható</li>
+        <li>Claude promptkönyvtár a te hangodra kalibrálva</li>
+        <li>Örökös hozzáférés a felvételekhez és frissítésekhez</li>
+        <li>Canva sablonok és automatizálási útmutatók</li>
+        <li>Üzemeltetési SOP — heti 1 óra a teljes jelenléthez</li>
+      </ul>
+      <a href="kapcsolat.html" class="price-box__cta">
+        Belépek a programba <i class="ti ti-arrow-right"></i>
+      </a>
+    </div>
+    <p class="pricing__note fi" style="transition-delay:.18s">Kérdésed van a programról? <a href="kapcsolat.html" style="color:var(--lblue);text-decoration:underline;">Írj nekem.</a></p>
+  </div>
+</section>
+
+<!-- ═══════ WORKSHOPS ═══════ -->
+<section class="workshops">
+  <div class="container" style="max-width:780px;">
+    <div class="label label--center fi">ÖNÁLLÓ WORKSHOPOK</div>
+    <h2 class="fi" style="font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.2rem);margin:0 0 .5rem;text-align:center;transition-delay:.06s">Kipróbálnád először egy modullal?</h2>
+    <p class="fi" style="text-align:center;color:var(--muted);font-size:15px;margin:0;transition-delay:.1s">Két modul önállóan is megvásárolható — a teljes programba beleszámít.</p>
+  </div>
+  <div class="workshops__grid fi" style="transition-delay:.14s">
+    <div class="workshop-card">
+      <div class="workshop-card__icon"><i class="ti ti-wand"></i></div>
+      <p class="workshop-card__title">Brandolt tartalom autopilóton</p>
+      <p class="workshop-card__sub">Claude és Canva összekötve — brandolt képek és szövegek, automatikusan, a te stílusodban. Megtanulod felépíteni a saját vizuális tartalom-gépet.</p>
+      <div class="workshop-card__price">49.900 Ft</div>
+      <a href="kapcsolat.html" class="workshop-card__cta">Érdekel <i class="ti ti-arrow-right"></i></a>
+      <span class="workshop-card__corner"><i class="ti ti-wand"></i></span>
+    </div>
+    <div class="workshop-card">
+      <div class="workshop-card__icon"><i class="ti ti-search"></i></div>
+      <p class="workshop-card__title">Találd meg, mire keresnek rád</p>
+      <p class="workshop-card__sub">Kulcsszókutatás AI-jal — megtalálod azokat a témákat, amikre a célközönséged tényleg keres, és amikkel a Google és a social is megtalál.</p>
+      <div class="workshop-card__price">49.900 Ft</div>
+      <a href="kapcsolat.html" class="workshop-card__cta">Érdekel <i class="ti ti-arrow-right"></i></a>
+      <span class="workshop-card__corner"><i class="ti ti-search"></i></span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer" id="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <div class="navbar__logo-fallback">
+          Perpetuum Essence
+          <span>Árgyelán Dorina</span>
+        </div>
+        <p>Tartalom-automatizálási program szakértőknek és kisvállalkozásoknak — Claude AI és Make.com segítségével.</p>
+      </div>
+      <div>
+        <p class="footer__heading">Navigáció</p>
+        <ul class="footer__links">
+          <li><a href="index.html">Főoldal</a></li>
+          <li><a href="program.html">Program</a></li>
+          <li><a href="szolgaltatasok.html">Szolgáltatások</a></li>
+          <li><a href="muhely.html">Műhely</a></li>
+          <li><a href="rolam.html">Rólam</a></li>
+          <li><a href="kapcsolat.html">Kapcsolat</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__heading">Kapcsolat</p>
+        <ul class="footer__links footer__links--single">
+          <li><a href="mailto:hello@argyelandorina.com">hello@argyelandorina.com</a></li>
+          <li><a href="#">Adatkezelési tájékoztató</a></li>
+          <li><a href="#">ÁSZF</a></li>
+        </ul>
+        <p class="footer__heading" style="margin-top:1.5rem">Kövess minket</p>
+        <div class="footer__social">
+          <a href="https://www.instagram.com/szovegbenjovagyok.hu_socialseo/" class="footer__social-link" aria-label="Instagram" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=100076366658629" class="footer__social-link" aria-label="Facebook" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/dorina-%C3%A1rgyel%C3%A1n-a81590218/" class="footer__social-link" aria-label="LinkedIn" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2025 Perpetuum Essence – Árgyelán Dorina. Minden jog fenntartva.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var nav = document.getElementById('peNav');
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('is-scrolled', window.scrollY > 80);
+  }, { passive: true });
+
+  var html = document.documentElement;
+  var themeBtn = document.getElementById('themeToggle');
+  var saved = localStorage.getItem('pe-theme') || 'light';
+  html.setAttribute('data-theme', saved);
+  themeBtn.textContent = saved === 'dark' ? '☀️' : '🌙';
+  themeBtn.addEventListener('click', function () {
+    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+    localStorage.setItem('pe-theme', next);
+  });
+
+  var burger = document.getElementById('burgerBtn');
+  var overlay = document.getElementById('mobOverlay');
+  var closeBtn = document.getElementById('overlayClose');
+  function openMenu() { overlay.classList.add('open'); burger.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { overlay.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+  burger.addEventListener('click', function (e) { e.stopPropagation(); overlay.classList.contains('open') ? closeMenu() : openMenu(); });
+  closeBtn.addEventListener('click', closeMenu);
+  document.addEventListener('click', function (e) { if (overlay.classList.contains('open') && !overlay.contains(e.target) && e.target !== burger) closeMenu(); });
+  overlay.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+
+  window.toggleModule = function(el) {
+    el.classList.toggle('open');
+  };
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fi').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.fi').forEach(function (el) { el.classList.add('visible'); });
+  }
+
+})();
+</script>
+
+</body>
+</html>
