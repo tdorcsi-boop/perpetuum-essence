@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adatkezelési Tájékoztató – Árgyelán Dorina</title>
+  <meta name="description" content="Árgyelán Dorina adatkezelési tájékoztatója. Ismerd meg, hogyan kezeljük személyes adataidat az argyelandorina.com weboldalon.">
+  <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Raleway:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sotetZold: #00594D;
+      --sotetkek: #073950;
+      --vilagoskek: #86C2CC;
+      --sarga: #FFDE59;
+      --szurgesFehér: #EFF3EF;
+      --feher: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background-color: var(--szurgesFehér); color: var(--sotetkek); line-height: 1.8; }
+    header { background-color: var(--sotetkek); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; }
+    header a { font-family: 'Raleway', sans-serif; color: var(--vilagoskek); text-decoration: none; font-size: 0.9rem; letter-spacing: 0.05em; }
+    header a:hover { color: var(--sarga); }
+    .logo { font-family: 'Yeseva One', serif; color: var(--feher); font-size: 1.3rem; }
+    .hero { background-color: var(--sotetkek); padding: 60px 40px 50px; text-align: center; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 40px; background-color: var(--szurgesFehér); clip-path: ellipse(55% 100% at 50% 100%); }
+    .hero h1 { font-family: 'Yeseva One', serif; color: var(--feher); font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 12px; }
+    .hero p { color: var(--vilagoskek); font-size: 0.95rem; font-family: 'Raleway', sans-serif; }
+    .container { max-width: 820px; margin: 0 auto; padding: 50px 30px 80px; }
+    .section { background: var(--feher); border-radius: 12px; padding: 36px 40px; margin-bottom: 24px; border-left: 4px solid var(--sotetZold); box-shadow: 0 2px 12px rgba(7,57,80,0.06); }
+    .section h2 { font-family: 'Yeseva One', serif; color: var(--sotetZold); font-size: 1.25rem; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--szurgesFehér); }
+    .section h3 { font-family: 'Raleway', sans-serif; font-weight: 700; color: var(--sotetkek); font-size: 1rem; margin: 20px 0 8px; }
+    .section p { font-size: 0.92rem; color: #2a3d4a; margin-bottom: 10px; }
+    .section ul { list-style: none; padding: 0; }
+    .section ul li { font-size: 0.92rem; color: #2a3d4a; padding: 5px 0 5px 20px; position: relative; }
+    .section ul li::before { content: '→'; color: var(--sotetZold); position: absolute; left: 0; font-size: 0.85rem; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .info-item { background: var(--szurgesFehér); border-radius: 8px; padding: 14px 16px; }
+    .info-item .label { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--sotetZold); margin-bottom: 4px; }
+    .info-item .value { font-size: 0.88rem; color: var(--sotetkek); }
+    .info-item .value a { color: var(--sotetZold); text-decoration: none; }
+    .info-item .value a:hover { text-decoration: underline; }
+    .rights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .right-item { background: var(--szurgesFehér); border-radius: 8px; padding: 14px 16px; border-top: 3px solid var(--vilagoskek); }
+    .right-item .right-title { font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 0.85rem; color: var(--sotetkek); margin-bottom: 4px; }
+    .right-item p { font-size: 0.82rem; color: #4a6070; }
+    .cookie-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 0.83rem; }
+    .cookie-table th { background: var(--sotetkek); color: var(--feher); padding: 10px 12px; text-align: left; font-family: 'Raleway', sans-serif; font-weight: 700; }
+    .cookie-table td { padding: 9px 12px; border-bottom: 1px solid var(--szurgesFehér); color: #2a3d4a; vertical-align: top; }
+    .cookie-table tr:last-child td { border-bottom: none; }
+    .cookie-table tr:nth-child(even) td { background: #f7f9f7; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; font-family: 'Raleway', sans-serif; }
+    .badge-necessary { background: #d4edda; color: #155724; }
+    .badge-analytics { background: #cce5ff; color: #004085; }
+    .badge-marketing { background: #fff3cd; color: #856404; }
+    .hataly { text-align: center; padding: 20px; font-size: 0.85rem; color: #7a9aaa; font-family: 'Raleway', sans-serif; }
+    footer { background-color: var(--sotetkek); padding: 30px 40px; text-align: center; color: var(--vilagoskek); font-size: 0.85rem; font-family: 'Raleway', sans-serif; }
+    footer a { color: var(--sarga); text-decoration: none; }
+    .download-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--sotetZold); color: var(--feher); padding: 12px 22px; border-radius: 8px; text-decoration: none; font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 0.88rem; margin-top: 10px; }
+    @media (max-width: 600px) {
+      .info-grid, .rights-grid { grid-template-columns: 1fr; }
+      .section { padding: 24px 20px; }
+      header { padding: 16px 20px; }
+      .hero { padding: 50px 20px 45px; }
+      .cookie-table { font-size: 0.75rem; }
+    }
+    @media print {
+      header, footer, .download-btn { display: none; }
+      .section { box-shadow: none; border: 1px solid #ddd; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="logo">Árgyelán Dorina</span>
+  <a href="index.html">← Vissza a főoldalra</a>
+</header>
+
+<div class="hero">
+  <h1>Adatkezelési Tájékoztató</h1>
+  <p>argyelandorina.com &nbsp;·&nbsp; Hatályos: 2026. január 1-től</p>
+</div>
+
+<div class="container">
+
+  <div class="section">
+    <h2>I. Az adatkezelő adatai</h2>
+    <div class="info-grid">
+      <div class="info-item">
+        <div class="label">Név</div>
+        <div class="value">Árgyelánné Tomcsányi Erzsébet Dorina egyéni vállalkozó</div>
+      </div>
+      <div class="info-item">
+        <div class="label">Székhely</div>
+        <div class="value">2440 Százhalombatta, Március 15. utca 2. fsz. 4. ajtó</div>
+      </div>
+      <div class="info-item">
+        <div class="label">Adószám</div>
+        <div class="value">57138819-1-33</div>
+      </div>
+      <div class="info-item">
+        <div class="label">Nyilvántartási szám</div>
+        <div class="value">55728854</div>
+      </div>
+      <div class="info-item">
+        <div class="label">E-mail</div>
+        <div class="value"><a href="mailto:hello@argyelandorina.com">hello@argyelandorina.com</a></div>
+      </div>
+      <div class="info-item">
+        <div class="label">Weboldal</div>
+        <div class="value"><a href="https://argyelandorina.com">argyelandorina.com</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>II. Az adatkezelés alapelvei</h2>
+    <p>A Szolgáltató az adatokat kizárólag a törvényeknek megfelelően gyűjti és kezeli, a GDPR (EU 2016/679 rendelet) és a 2011. évi CXII. törvény (Infotv.) előírásainak megfelelően. Személyes adatokat harmadik félnek csak az érintett hozzájárulásával, vagy jogszabályi kötelezettség alapján adunk át.</p>
+    <p>Marketing tartalmú üzenetet (hírlevél) csak kifejezett hozzájárulással küldünk; erről bármikor le lehet iratkozni.</p>
+  </div>
+
+  <div class="section">
+    <h2>III. Kezelt adatok és adatkezelési célok</h2>
+
+    <h3>1. Hírlevél-feliratkozás</h3>
+    <ul>
+      <li><strong>Kezelt adatok:</strong> keresztnév, e-mail cím</li>
+      <li><strong>Cél:</strong> hírlevelek és ingyenes tartalmak küldése</li>
+      <li><strong>Jogalap:</strong> az érintett hozzájárulása (GDPR 6. cikk (1) a) pont)</li>
+      <li><strong>Megőrzési idő:</strong> a hozzájárulás visszavonásáig – bármikor leiratkozható</li>
+    </ul>
+
+    <h3>2. Kapcsolatfelvételi űrlap</h3>
+    <ul>
+      <li><strong>Kezelt adatok:</strong> teljes név, e-mail cím, az üzenet tartalma</li>
+      <li><strong>Cél:</strong> kapcsolatfelvétel, érdeklődés kezelése</li>
+      <li><strong>Jogalap:</strong> az érintett hozzájárulása (GDPR 6. cikk (1) a) pont)</li>
+      <li><strong>Megőrzési idő:</strong> az ügy lezárásától számított 1 évig</li>
+      <li><strong>Automatizálás:</strong> az adatok Make.com platformon keresztül automatizált feldolgozáson eshetnek át; minden esetben emberi felülvizsgálat biztosított</li>
+    </ul>
+
+    <h3>3. Vásárlás / regisztráció</h3>
+    <ul>
+      <li><strong>Kezelt adatok:</strong> teljes név, e-mail cím, számlázási cím, adószám (cégek esetén)</li>
+      <li><strong>Cél:</strong> szerződés teljesítése, számlázás</li>
+      <li><strong>Jogalap:</strong> szerződés teljesítése (GDPR 6. cikk (1) b) pont); jogi kötelezettség (GDPR 6. cikk (1) c) pont)</li>
+      <li><strong>Megőrzési idő:</strong> a számviteli jogszabályok szerint 8 évig</li>
+    </ul>
+
+    <h3>4. Sütik (cookie-k)</h3>
+    <p>A weboldal az alábbi sütiket használja. A nem szükséges sütik csak a látogató előzetes hozzájárulásával töltődnek be.</p>
+
+    <table class="cookie-table">
+      <thead>
+        <tr>
+          <th>Süti neve</th>
+          <th>Típus</th>
+          <th>Élettartam</th>
+          <th>Funkció</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>gdpr_compliance</td>
+          <td><span class="badge badge-necessary">Szükséges</span></td>
+          <td>1 év</td>
+          <td>A süti-hozzájárulás tárolása</td>
+        </tr>
+        <tr>
+          <td>PHPSESSID</td>
+          <td><span class="badge badge-necessary">Szükséges</span></td>
+          <td>Munkamenet</td>
+          <td>Munkamenet-azonosító, az oldal működéséhez szükséges</td>
+        </tr>
+        <tr>
+          <td>_ga, _ga_*</td>
+          <td><span class="badge badge-analytics">Analitika</span></td>
+          <td>2 év</td>
+          <td>Google Analytics – látogatottság mérése, anonimizált statisztikák</td>
+        </tr>
+        <tr>
+          <td>_gid</td>
+          <td><span class="badge badge-analytics">Analitika</span></td>
+          <td>24 óra</td>
+          <td>Google Analytics – felhasználók megkülönböztetése</td>
+        </tr>
+        <tr>
+          <td>_fbp</td>
+          <td><span class="badge badge-marketing">Marketing</span></td>
+          <td>3 hónap</td>
+          <td>Facebook Pixel – hirdetések mérése és célzása</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:10px; font-size:0.82rem; color:#6a8a9a;">A sütik kezelhetők a weboldalon elhelyezett süti-beállítások panelen, illetve bármikor módosíthatók a böngésző beállításaiban.</p>
+  </div>
+
+  <div class="section">
+    <h2>IV. Automatizálási eszközök és AI-alapú adatfeldolgozás</h2>
+    <p>A Szolgáltató az alábbi eszközöket veszi igénybe:</p>
+    <ul>
+      <li><strong>Make.com</strong> – kapcsolatfelvételi üzenetek feldolgozása, e-mail automatizálás</li>
+      <li><strong>Anthropic Claude API</strong> – üzenetek elemzése, válaszok előkészítése (az API-n keresztül feldolgozott adatokat az Anthropic nem használja modell-tanításra)</li>
+      <li><strong>MailerLite</strong> – e-mail lista kezelése, hírlevél küldése</li>
+      <li><strong>Google Workspace</strong> – adatok tárolása (Sheets, Drive), webanalitika (Analytics)</li>
+      <li><strong>Stripe</strong> – online fizetés feldolgozása (bankkártya adatok a Szolgáltatóhoz nem jutnak el)</li>
+      <li><strong>Tally</strong> – online űrlapok feldolgozása</li>
+      <li><strong>Websupport Magyarország Kft. (mhosting.hu)</strong> – tárhelyszolgáltatás</li>
+    </ul>
+    <p style="margin-top:14px;">Az automatizált feldolgozás nem eredményez az érintettre nézve joghatással bíró döntést, ezért a GDPR 22. cikke nem alkalmazandó. Emberi felülvizsgálat bármikor kérhető: <a href="mailto:hello@argyelandorina.com" style="color:var(--sotetZold);">hello@argyelandorina.com</a></p>
+  </div>
+
+  <div class="section">
+    <h2>V. Adattovábbítás harmadik országba</h2>
+    <p><strong>Google LLC (USA):</strong> az adattovábbítás jogalapja az EU–US Data Privacy Framework (DPF) és az Európai Bizottság által jóváhagyott általános szerződési feltételek (SCC, GDPR 46. cikk (2) c) pont).</p>
+    <p><strong>Anthropic (USA):</strong> az adattovábbítás jogalapja kizárólag az Európai Bizottság által jóváhagyott általános szerződési feltételek (SCC, GDPR 46. cikk (2) c) pont).</p>
+    <p>Tájékoztatás kérhető: <a href="mailto:hello@argyelandorina.com" style="color:var(--sotetZold);">hello@argyelandorina.com</a></p>
+  </div>
+
+  <div class="section">
+    <h2>VI. Az érintett jogai</h2>
+    <div class="rights-grid">
+      <div class="right-item">
+        <div class="right-title">Tájékoztatáshoz való jog</div>
+        <p>Kérhető, hogy milyen adatokat kezelünk rólad.</p>
+      </div>
+      <div class="right-item">
+        <div class="right-title">Helyesbítéshez való jog</div>
+        <p>Kérhető a pontatlan adatok javítása.</p>
+      </div>
+      <div class="right-item">
+        <div class="right-title">Törléshez való jog</div>
+        <p>Kérhető az adatok törlése (kivéve jogszabályi megőrzési kötelezettség esetén).</p>
+      </div>
+      <div class="right-item">
+        <div class="right-title">Korlátozáshoz való jog</div>
+        <p>Kérhető az adatkezelés felfüggesztése.</p>
+      </div>
+      <div class="right-item">
+        <div class="right-title">Tiltakozáshoz való jog</div>
+        <p>Tiltakozható a jogos érdeken alapuló adatkezelés ellen.</p>
+      </div>
+      <div class="right-item">
+        <div class="right-title">Adathordozhatósághoz való jog</div>
+        <p>Kérhető az adatok géppel olvasható formátumban való kiadása (hozzájáruláson vagy szerződésen alapuló, automatizált adatkezelésnél).</p>
+      </div>
+      <div class="right-item">
+        <div class="right-title">Automatizált döntéshozatal</div>
+        <p>Kérhető emberi beavatkozás, ha automatizált döntés érintene – jelen esetben ilyen döntés nem születik.</p>
+      </div>
+    </div>
+    <p style="margin-top:16px; font-size:0.9rem;">A jogok érvényesítése: <a href="mailto:hello@argyelandorina.com" style="color:var(--sotetZold);">hello@argyelandorina.com</a> – 30 napon belül válaszolunk.</p>
+  </div>
+
+  <div class="section">
+    <h2>VII. Jogorvoslat</h2>
+    <ul>
+      <li><strong>NAIH:</strong> 1055 Budapest, Falk Miksa utca 9-11. · <a href="mailto:ugyfelszolgalat@naih.hu" style="color:var(--sotetZold);">ugyfelszolgalat@naih.hu</a> · <a href="https://naih.hu" style="color:var(--sotetZold);">naih.hu</a></li>
+      <li><strong>Bíróság:</strong> az érintett lakóhelye szerint illetékes törvényszék</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>VIII. A tájékoztató módosítása</h2>
+    <p>A Szolgáltató fenntartja a jogát jelen tájékoztató módosítására. A módosítás a weboldalon való közzétételkor lép hatályba. Lényeges változásról a hírlevél-feliratkozókat e-mailben értesítjük.</p>
+    <div style="margin-top:20px;">
+      <a href="javascript:window.print()" class="download-btn">🖨️ Nyomtatás / Mentés PDF-ként</a>
+    </div>
+  </div>
+
+  <div class="hataly">Hatályos: 2026. január 1. napjától</div>
+
+</div>
+
+<footer>
+  <p>© 2026 Árgyelán Dorina · <a href="adatkezeles.html">Adatkezelési tájékoztató</a> · <a href="aszf.html">ÁSZF</a> · <a href="mailto:hello@argyelandorina.com">hello@argyelandorina.com</a></p>
+</footer>
+
+</body>
+</html>
